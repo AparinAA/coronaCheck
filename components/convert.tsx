@@ -46,7 +46,7 @@ class Convert extends React.Component<IProps, IState> {
         return (
             <div className={styles.convert}>
                 <h2>Convert KoronaPay</h2>
-                <Rate name="Amount" value={amount} handler={this.handlerValueAmount} />
+                <Rate name="Amount convert" value={amount} handler={this.handlerValueAmount} />
                 <Rate name="USD rate" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")}/>
                 <Rate name="TRY rate" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")}/>
                 <Rate name="EUR rate" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")}/>

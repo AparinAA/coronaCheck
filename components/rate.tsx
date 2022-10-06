@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "../styles/convert.module.css";
 
 type func = (value: number) => void;
 
@@ -19,9 +20,15 @@ export default function Rate (props: IProps) {
     }
 
     return (
-        <div>
-            <input placeholder={'' + name} onChange={handlerChange} id={"rate-" + name}/>
-            <label htmlFor={"rate-" + name}>{(total && total > 0) ? total + ' $' : ''}</label>
+        <div className={styles.field}>
+            <input placeholder={'' + name} onChange={handlerChange} id={("rate-" + name)?.replace(' ', '')}/>
+            <label htmlFor={("rate-" + name)?.replace(' ', '')}>
+                {
+                    (total && total > 0) ? 
+                    <><span>{total}</span> <>$</></> : 
+                    ''
+                }
+            </label>
         </div>    
     )
 }

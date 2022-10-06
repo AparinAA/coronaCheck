@@ -3,3 +3,30 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+    font-size: 12px;
+}
+
+.field > input {
+    height: 36px;
+    font-size: 14px;
+    border-radius: 9px;
+    box-shadow: none;
+    border: 2px solid rgb(68, 67, 67);
+    padding: 0 5px;
+}
+
+.field > input:where(:focus, :active, :hover) {
+    outline: none;
+    
+}
+
+.field > label {
+    margin: auto 5px;
+    opacity: .8;
+}
