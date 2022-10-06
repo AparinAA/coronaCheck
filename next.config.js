@@ -1,19 +1,26 @@
 /** @type {import('next').NextConfig} */
+
+const isGithubActions = process.env.GITHUB_ACTIONS || false
+
+let assetPrefix = '/'
+
+if (isGithubActions) {
+  // trim off `<owner>/`
+  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
+
+  assetPrefix = `/${repo}/`
+}
+
 const nextConfig = {
   reactStrictMode: true,
-  
-}
-const images = {
-  dangerouslyAllowSVG: true,
-  contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-}
-
-module.exports = { 
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH,
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
-  nextConfig,
-  images
+  images: {
+    domains: ['reqres.in', 's.gravatar.com', 'lh3.googleusercontent.com'],
+    formats: ['image/avif', 'image/webp'],
+  },
+  assetPrefix,
 }
 
-//domains: ['reqres.in', 's.gravatar.com'],
-//formats: ['image/avif', 'image/webp'],
+module.exports = nextConfig;
+
+
+
