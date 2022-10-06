@@ -17,7 +17,9 @@ const Users: NextPage = ({users}: any) => {
                 <title>Posts</title>
             </Head>
             
-            <a className={styles.logout} href='/api/auth/logout'>Logout</a>
+            <Link href='/api/auth/logout'>
+                <a className={styles.logout}>Logout</a>
+            </Link>
             
             <div>
                 <ul className={styles.list}>

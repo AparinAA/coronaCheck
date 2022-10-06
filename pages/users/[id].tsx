@@ -22,7 +22,9 @@ export default withPageAuthRequired(
                     <title>{title}</title>
                 </Head>
                 <div>
-                    <a href='/api/auth/logout' className={styles.logout}>Logout</a>
+                    <Link href='/api/auth/logout'>
+                        <a className={styles.logout}>Logout</a>
+                    </Link>
                 </div>
                 <div className={styles.profile}>
                     {

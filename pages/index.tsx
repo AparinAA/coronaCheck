@@ -26,7 +26,7 @@ const Home: NextPage = () => {
                     user ? 
                     <>
                         <span>{user?.name}</span>
-                        <img src={''+user?.picture} alt="avatar" width={100} height={100}/>
+                        <Image src={''+user?.picture} alt="avatar" width={100} height={100}/>
                         <Link href='api/auth/logout'><a className={styles.logout}>Logout</a></Link>
                         <Link href={'/users'}><a className={styles.start}>Push me</a></Link>
                         
