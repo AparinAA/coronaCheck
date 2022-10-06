@@ -13,10 +13,6 @@ if (isGithubActions) {
 
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    domains: ['reqres.in', 's.gravatar.com', 'lh3.googleusercontent.com'],
-    formats: ['image/avif', 'image/webp'],
-  },
   assetPrefix,
 }
 
