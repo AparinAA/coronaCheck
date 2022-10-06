@@ -1,4 +1,6 @@
-/** @type {import('next').NextConfig} */
+/** 
+ * @type {import('next').NextConfig} 
+ */
 
 const isGithubActions = process.env.GITHUB_ACTIONS || false
 
@@ -13,6 +15,11 @@ if (isGithubActions) {
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ['reqres.in', 's.gravatar.com', 'lh3.googleusercontent.com'],
+    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
+  },
   assetPrefix,
 }
 
