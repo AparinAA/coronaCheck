@@ -2,13 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
-
-
-module.exports = {
   images: {
-    domains: ['reqres.in'],
+    domains: ['reqres.in', 's.gravatar.com'],
     formats: ['image/avif', 'image/webp'],
   },
-  nextConfig
+  assetPrefix: '/'
 }
+
+
+module.exports = nextConfig;

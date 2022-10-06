@@ -15,9 +15,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  height: 50vh;
-  margin: 150px;
+  width: 100px;
+  height: 100px;
+  margin: 30px 10px;
   border-radius: 4px;
   box-shadow: 2px 2px 10px 10px rgba(170, 170, 170, 0.564);
   background-color: rgb(126, 210, 235);
@@ -69,4 +69,21 @@
 
 .profile {
   margin: 15px;
+}
+
+.login {
+  display: inline-block;
+  margin: 5px 15px;
+  padding: 6px 18px;
+  background-color: rgb(35, 209, 29);
+  border-radius: 3px;
+
+}
+
+.logout {
+  display: inline-block;
+  margin: 5px 15px;
+  padding: 6px 18px;
+  background-color: rgba(239, 44, 70, 0.873);
+  border-radius: 3px;
 }
