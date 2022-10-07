@@ -1,7 +1,6 @@
 .convert {
     display: flex;
     flex-direction: column;
-    width: 50vw;
     margin: 0 auto;
     gap: 10px;
 }
@@ -48,3 +47,19 @@
     gap: 0 5px;
     width: 100%;
 }
+
+@media (max-width: 628px)  {
+    .convert {
+        width: 90vw;
+    }
+}
+
+
+@media (min-width: 629px) and (max-width: 768px) {
+    .convert {
+        width: 50vw;
+    }
+}
+
+
+
