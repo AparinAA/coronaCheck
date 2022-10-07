@@ -31,6 +31,7 @@ class Convert extends React.Component<IProps, IState, Value> {
         this.handlerValueEUR = this.handlerValueEUR.bind(this);
         this.handlerSellUSD = this.handlerSellUSD.bind(this);
         this.handlerBuyUSD = this.handlerBuyUSD.bind(this);
+        this.handlerPercentage = this.handlerPercentage.bind(this);
     }
     
 
@@ -88,7 +89,7 @@ function totalConvert(state: IState, currency: string): number {
 
     if (currency === "try") {
         total = (!state?.amount || !state?.rateTRY) ? 0 : (+state?.amount / +state?.rateTRY);
-        total *= ( 1 - ( +(state?.commissionPercent ?? 0) / 100) ) / +(state?.buyUSD ?? 1) ;
+        total *= ( 1 - ( +(state?.percentage ?? 0) / 100) ) / +(state?.buyUSD ?? 1) ;
     }
 
     if (currency === "eur") {

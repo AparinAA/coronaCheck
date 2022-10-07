@@ -43,7 +43,7 @@ export default function Rate (props: IProps) {
                 
                 <input 
                     className={styles.input}
-                    placeholder={'' + name} 
+                    placeholder={'Type ' + name} 
                     onChange={handlerChange} 
                     id={("rate-" + name)?.replace(' ', '')}
                     value={value ?? ''}
