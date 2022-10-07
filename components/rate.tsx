@@ -24,21 +24,32 @@ export default function Rate (props: IProps) {
 
     return (
         <div className={styles.field}>
-            <label htmlFor={("rate-" + name)?.replace(' ', '')}>
-                { (typeof name === 'string') ? name : ''}
+            <label
+                className={styles.labelInput}
+                htmlFor={("rate-" + name)?.replace(' ', '')}>
+                <span>{ (typeof name === 'string') ? name : ''}</span>
+                
+                
+                {
+                     
+                    <div className={styles.total}>
+                        {
+                            (total && total > 0) ?
+                            <div><span>{total}</span> <>$</></div> :
+                            ''
+                        }
+                    </div>
+                }
+                
+                <input 
+                    className={styles.input}
+                    placeholder={'' + name} 
+                    onChange={handlerChange} 
+                    id={("rate-" + name)?.replace(' ', '')}
+                    value={value ?? ''}
+                />
             </label>
-            <input 
-                placeholder={'' + name} 
-                onChange={handlerChange} 
-                id={("rate-" + name)?.replace(' ', '')}
-                value={value ?? ''}
-            />
             
-            {
-                (total && total > 0) ? 
-                <div><div><span>{total}</span> <>$</></div></div> : 
-                ''
-            }
         </div>    
     )
 }
