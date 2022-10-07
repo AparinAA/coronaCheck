@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styles from "../styles/convert.module.css";
 
-type func = (value: number) => void;
+type func = (value: number | undefined | string) => void;
 
 interface IProps {
     [type: string] : string | number | func | undefined,
     total?: number,
+    value: number | string | undefined
     handler: func,
 }
 
@@ -13,22 +14,31 @@ type $Event = any;
 
 export default function Rate (props: IProps) {
     
-    const {name, total, handler} = props;
+    const {name, value, total, handler} = props;
     function handlerChange(event: $Event) {
         const value = event?.target?.value;
-        Number(value) ? handler(Number(value)) : handler(0);
+        const number = (''+value)?.replace(',','.');
+        
+        number ? handler(number) : handler(undefined);
     }
 
     return (
         <div className={styles.field}>
-            <input placeholder={'' + name} onChange={handlerChange} id={("rate-" + name)?.replace(' ', '')}/>
             <label htmlFor={("rate-" + name)?.replace(' ', '')}>
-                {
-                    (total && total > 0) ? 
-                    <><span>{total}</span> <>$</></> : 
-                    ''
-                }
+                { (typeof name === 'string') ? name : ''}
             </label>
+            <input 
+                placeholder={'' + name} 
+                onChange={handlerChange} 
+                id={("rate-" + name)?.replace(' ', '')}
+                value={value ?? ''}
+            />
+            
+            {
+                (total && total > 0) ? 
+                <div><div><span>{total}</span> <>$</></div></div> : 
+                ''
+            }
         </div>    
     )
 }

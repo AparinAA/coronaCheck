@@ -9,7 +9,6 @@ import Convert from '../components/convert';
 const Home: NextPage = () => {
     const { user, error, isLoading } = useUser();
 
-    console.info(user, isLoading);
     { isLoading && <div>Loading...</div> }
     { error && <div>{error.message}</div> }
 

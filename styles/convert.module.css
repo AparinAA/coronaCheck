@@ -8,8 +8,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 60px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .field > input {
@@ -27,6 +26,22 @@
 }
 
 .field > label {
-    margin: auto 5px;
+    margin: 2px;
+    font-size: 14px;
+}
+
+.field > div {
+    height: 20px;
     opacity: .8;
+    font-size: 12px;
+}
+
+.field > div > div {
+    margin: auto 5px;
+}
+
+.sellbuyUSD {
+    display: flex;
+    gap: 5px;
+    width: 100%;
 }
