@@ -8,12 +8,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .field > input {
     height: 36px;
-    font-size: 14px;
     border-radius: 9px;
     box-shadow: none;
     border: 2px solid rgb(68, 67, 67);
@@ -27,7 +26,6 @@
 
 .field > label {
     margin: 2px;
-    font-size: 14px;
 }
 
 .field > div {
