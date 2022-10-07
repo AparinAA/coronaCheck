@@ -1,8 +1,9 @@
 .convert {
     display: flex;
     flex-direction: column;
+    width: 35vw;
+    margin: 0 auto;
     gap: 10px;
-    margin: 0 50px;
 }
 
 .field {
@@ -15,7 +16,6 @@
 .field > input {
     font-size: 16px;
     height: 36px;
-    
     border-radius: 9px;
     box-shadow: none;
     border: 2px solid rgb(68, 67, 67);
@@ -33,7 +33,7 @@
 }
 
 .field > div {
-    margin: auto 1px;
+    margin: 2px 1px;
     opacity: .8;
     font-size: 14px;
 }
