@@ -5,13 +5,13 @@
 }
 
 .field {
-    position: relative;
     display: flex;
     flex-direction: column;
     font-size: 16px;
 }
 
 .field > input {
+    font-size: 16px;
     height: 36px;
     border-radius: 9px;
     box-shadow: none;
@@ -26,12 +26,13 @@
 
 .field > label {
     margin: 2px;
+    font-size: 16px;
 }
 
 .field > div {
-    height: 20px;
+    margin: auto 1px;
     opacity: .8;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .field > div > div {
