@@ -23,7 +23,7 @@ class Convert extends React.Component<IProps, IState, Value> {
             'rateEUR': undefined,
             'sellUSD': 18.2, //продаю доллары в обменнике за TRY
             'buyUSD': 18.65, //покупаю доллары в обменнике за TRY
-            'commissionPercent': 2,
+            'percentage': 2,
         }
         this.handlerValueAmount = this.handlerValueAmount.bind(this);
         this.handlerValueUSD = this.handlerValueUSD.bind(this);
@@ -52,9 +52,12 @@ class Convert extends React.Component<IProps, IState, Value> {
     handlerBuyUSD(value: Value): void {
         this.setState({'buyUSD': value});
     }
+    handlerPercentage(value: Value): void {
+        this.setState({'percentage': value});
+    }
 
     render () {
-        const {amount, rateUSD, rateTRY, rateEUR, sellUSD, buyUSD} = this.state;
+        const {amount, rateUSD, rateTRY, rateEUR, sellUSD, buyUSD, percentage} = this.state;
         const state = this.state;
 
         return (
@@ -64,6 +67,7 @@ class Convert extends React.Component<IProps, IState, Value> {
                 <div className={styles.sellbuyUSD}>
                     <Rate name="Sell USD" handler={this.handlerSellUSD} value={sellUSD}/>
                     <Rate name="Buy USD" handler={this.handlerBuyUSD} value={buyUSD}/>
+                    <Rate name="Percentage" handler={this.handlerPercentage} value={percentage}/>
                 </div>
                 <Rate name="USD rate" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")}/>
                 <Rate name="TRY rate" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")}/>
