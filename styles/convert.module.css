@@ -23,6 +23,14 @@
     width: 100%;
 }
 
+.input::-webkit-input-placeholder {
+    font-size: 12px;
+}
+
+.input::placeholder {
+    font-size:  12px;
+}
+
 .input:where(:focus, :active, :hover) {
     outline: none;
     
