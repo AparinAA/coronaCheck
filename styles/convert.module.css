@@ -17,6 +17,7 @@
 }
 
 .input {
+    background-color: none;
     font-size: 16px;
     min-height: 36px;
     border: 0;

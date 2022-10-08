@@ -21,10 +21,10 @@ class Convert extends React.Component<IProps, IState, Value> {
             'rateUSD': undefined,
             'rateTRY': undefined,
             'rateEUR': undefined,
-            'sellUSD': 18.2, //продаю доллары в обменнике за TRY
-            'buyUSD': 18.65, //покупаю доллары в обменнике за TRY
+            'sellUSD': 18, //продаю доллары в обменнике за TRY
+            'buyUSD': 18.695, //покупаю доллары в обменнике за TRY
             'percentage': 2,
-            'countingUSD': 1,
+            'counting': 'USD',
         }
         this.handlerValueAmount = this.handlerValueAmount.bind(this);
         this.handlerValueUSD = this.handlerValueUSD.bind(this);
@@ -59,24 +59,25 @@ class Convert extends React.Component<IProps, IState, Value> {
         this.setState({'percentage': value});
     }
     handlerExchange(event: any): void {
-        this.setState({'countingUSD' : event.target.value === 'USD' ? 1 : 0});
+        this.setState({'counting' : event.target.value});
     }
+
     render () {
-        const {amount, rateUSD, rateTRY, rateEUR, sellUSD, buyUSD, percentage} = this.state;
+        const {amount, rateUSD, rateTRY, rateEUR, sellUSD, buyUSD, percentage, counting} = this.state;
         const state = this.state;
 
         return (
             <div className={styles.convert}>
                 <h2 className={styles.header}>Convert KoronaPay</h2>
                 <div className={styles.sellbuyUSD}>
-                    <Rate name="Amount convert" value={amount} handler={this.handlerValueAmount}/>
+                    <Rate name="Amount RUB convert" value={amount} handler={this.handlerValueAmount}/>
                         
-                    <input value="USD" className={styles.radioExch1} id="exchUSD" name="exchange" type="radio" checked={(''+ this.state.countingUSD) === '1'} onChange={this.handlerExchange}/>
+                    <input value="USD" className={styles.radioExch1} id="exchUSD" name="exchange" type="radio" checked={this.state.counting === 'USD'} onChange={this.handlerExchange}/>
                     <label htmlFor="exchUSD" className={`${styles.labelExchCom} ${styles.labelExch1}`}>
                         <span>USD</span>
                     </label>
                     
-                    <input value="TRY" className={styles.radioExch2} id="exchTRY" name="exchange" type="radio" checked={(''+ this.state.countingUSD) !== '1'} onChange={this.handlerExchange}/>
+                    <input value="TRY" className={styles.radioExch2} id="exchTRY" name="exchange" type="radio" checked={this.state.counting === 'TRY'} onChange={this.handlerExchange}/>
                     <label htmlFor="exchTRY" className={`${styles.labelExchCom} ${styles.labelExch2}`}>
                         <span>TRY</span>
                     </label>
@@ -87,9 +88,9 @@ class Convert extends React.Component<IProps, IState, Value> {
                     <Rate name="Buy USD" handler={this.handlerBuyUSD} value={buyUSD}/>
                     <Rate name="Percentage" handler={this.handlerPercentage} value={percentage}/>
                 </div>
-                <Rate name="USD rate" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")}/>
-                <Rate name="TRY rate" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")}/>
-                <Rate name="EUR rate" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")}/>
+                <Rate name="USD rate" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")} counting={counting}/>
+                <Rate name="TRY rate" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")} counting={counting}/>
+                <Rate name="EUR rate" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")} counting={counting}/>
             </div>
         );
     }
@@ -99,14 +100,15 @@ export default Convert;
 
 function totalConvert(state: IState, currency: string): number {
     let total = 0;
+    const counting = state.counting;
     if (currency === "usd") {
         total = (!state?.amount || !state?.rateUSD) ? 0 : (+state?.amount / +state?.rateUSD);
-        total *= +(state?.sellUSD ?? 0) / +(state?.buyUSD ?? 1);
+        total *= +(state?.sellUSD ?? 0) / (counting === "TRY" ? 1 : +(state?.buyUSD ?? 1));
     }
 
     if (currency === "try") {
         total = (!state?.amount || !state?.rateTRY) ? 0 : (+state?.amount / +state?.rateTRY);
-        total *= ( 1 - ( +(state?.percentage ?? 0) / 100) ) / +(state?.buyUSD ?? 1) ;
+        total *= ( 1 - ( +(state?.percentage ?? 0) / 100) ) / (counting === "TRY" ? 1 : +(state?.buyUSD ?? 1)) ;
     }
 
     if (currency === "eur") {

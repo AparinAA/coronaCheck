@@ -15,7 +15,7 @@ type $Event = any;
 
 export default function Rate (props: IProps) {
     
-    const {name, value, total, handler, type} = props;
+    const {name, value, total, handler, type, counting} = props;
     function handlerChange(event: $Event) {
         const value = event?.target?.value;
         const number = (''+value)?.replace(',','.');
@@ -36,7 +36,7 @@ export default function Rate (props: IProps) {
                     <div className={styles.total}>
                         {
                             (total && total > 0) ?
-                            <div><span>{total}</span> <>$</></div> :
+                            <div><span>{total}</span> <> {counting === "TRY" ? <>&#x20a4;</> : `$` }</></div> :
                             ''
                         }
                     </div>
