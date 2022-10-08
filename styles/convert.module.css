@@ -42,7 +42,7 @@
     border-radius: 9px;
     box-shadow: none;
     border: 2px solid rgb(68, 67, 67);
-    padding: 0 5px;
+    padding: 2px 5px 0;
     margin: 2px;
     font-size: 14px;
 
@@ -65,6 +65,30 @@
     gap: 0 5px;
     width: 100%;
 }
+
+.radioExch1, .radioExch2 {
+    opacity: 0;
+    display: none;
+}
+
+.labelExchCom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 9px;    
+    width: 90px;
+}
+
+.radioExch1:checked ~ .labelExch1 {
+    background-color: rgb(35, 209, 29)
+}
+
+.radioExch2:checked ~ .labelExch2 {
+    background-color: rgb(35, 209, 29)
+}
+
+
 
 @media (max-width: 628px)  {
     .convert {

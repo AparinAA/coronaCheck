@@ -6,7 +6,8 @@ type func = (value: number | undefined | string) => void;
 interface IProps {
     [type: string] : string | number | func | undefined,
     total?: number,
-    value: number | string | undefined
+    value: number | string | undefined,
+    type?: string,
     handler: func,
 }
 
@@ -14,7 +15,7 @@ type $Event = any;
 
 export default function Rate (props: IProps) {
     
-    const {name, value, total, handler} = props;
+    const {name, value, total, handler, type} = props;
     function handlerChange(event: $Event) {
         const value = event?.target?.value;
         const number = (''+value)?.replace(',','.');
@@ -42,6 +43,7 @@ export default function Rate (props: IProps) {
                 }
                 
                 <input 
+                    type={type ?? "text"}
                     className={styles.input}
                     placeholder={'Type ' + name} 
                     onChange={handlerChange} 
