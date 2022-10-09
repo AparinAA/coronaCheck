@@ -84,13 +84,13 @@ class Convert extends React.Component<IProps, IState, Value> {
                         
                 </div>
                 <div className={styles.sellbuyUSD}>
-                    <Rate name="Sell USD" handler={this.handlerSellUSD} value={sellUSD}/>
-                    <Rate name="Buy USD" handler={this.handlerBuyUSD} value={buyUSD}/>
+                    <Rate name="Ex. USD to TRY" handler={this.handlerSellUSD} value={sellUSD}/>
+                    <Rate name="Ex. TRY to USD" handler={this.handlerBuyUSD} value={buyUSD}/>
                     <Rate name="Percentage" handler={this.handlerPercentage} value={percentage}/>
                 </div>
-                <Rate name="USD rate" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")} counting={counting}/>
-                <Rate name="TRY rate" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")} counting={counting}/>
-                <Rate name="EUR rate" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")} counting={counting}/>
+                <Rate name="USD rate KoronaPay" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")} counting={counting}/>
+                <Rate name="TRY rate KoronaPay" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")} counting={counting}/>
+                <Rate name="EUR rate KoronaPay" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")} counting={counting}/>
             </div>
         );
     }

@@ -15,9 +15,9 @@ const Home: NextPage = () => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Index</title>
+                <title>Exchange</title>
                 <meta name="description" content="Post content" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/exchange.ico" />
             </Head>
             
             <main className={styles.main}>
