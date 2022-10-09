@@ -6,6 +6,8 @@ import styles from '../styles/Home.module.css'
 import { useUser } from '@auth0/nextjs-auth0';
 import Convert from '../components/convert';
 
+const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 const Home: NextPage = () => {
     const { user, error, isLoading } = useUser();
 
@@ -17,7 +19,7 @@ const Home: NextPage = () => {
             <Head>
                 <title>Exchange</title>
                 <meta name="description" content="Post content" />
-                <link rel="icon" href="/exchange.ico" />
+                <link rel="icon" href={`${prefix}/exchange.ico`} />
             </Head>
             
             <main className={styles.main}>
@@ -26,11 +28,11 @@ const Home: NextPage = () => {
                     <>
                         <span>{user?.name}</span>
                         <Image src={''+user?.picture} alt="avatar" width={100} height={100}/>
-                        <Link href='api/auth/logout'><a className={styles.logout}>Logout</a></Link>
-                        <Link href={'/users'}><a className={styles.start}>Push me</a></Link>
+                        <Link href={`${prefix}/api/auth/logout`}><a className={styles.logout}>Logout</a></Link>
+                        <Link href={`${prefix}/users`}><a className={styles.start}>Push me</a></Link>
                         
                     </> :
-                    <Link href="api/auth/login"><a className={styles.login}>Login</a></Link>
+                    <Link href={`${prefix}/api/auth/login`}><a className={styles.login}>Login</a></Link>
                 }
                 <Convert />
             </main>
