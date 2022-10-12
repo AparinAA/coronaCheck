@@ -94,7 +94,7 @@ class Convert extends React.Component<IProps, IState, Value> {
                 </div>
                 <div className={styles.sellbuyUSD}>
                     <Rate name="USD to TRY" handler={this.handlerSellUSD} value={sellUSD}/>
-                    <Rate name="TRY to USD" handler={this.handlerBuyUSD} value={buyUSD}/>
+                    <Rate name="&#x20a4;/&#x20b8; to USD" handler={this.handlerBuyUSD} value={buyUSD}/>
                     <Rate name="KZT to TRY" handler={this.handlerSellKZT} value={sellKZT}/>
                     <Rate name="Percentage" handler={this.handlerPercentage} value={percentage}/>
                 </div>
@@ -123,8 +123,9 @@ function totalConvert(state: IState, currency: string): number {
     }
 
     if (currency === "kzt") {
-        total = (!state?.amount || !state?.rateKZT || !state?.sellKZT || counting !== "TRY") ? 
-                0 : (+state?.amount / (+state?.rateKZT * +state?.sellKZT));
+        total = (!state?.amount || !state?.rateKZT || !state?.sellKZT || !state?.buyUSD) ? 
+                0 : (+state?.amount / (+state?.rateKZT * ( counting === "TRY" ? +state?.sellKZT : +state?.buyUSD) ) );
+        
     }
 
     if (currency === "eur") {
