@@ -67,6 +67,7 @@
     width: 100%;
 }
 
+
 .radioExch1, .radioExch2 {
     opacity: 0;
     display: none;
@@ -89,20 +90,22 @@
     background-color: rgb(35, 209, 29)
 }
 
+@media (max-width: 450px) {
+    .labelInput {
+        font-size: 10px !important;
+    }
+}
 
-
-@media (max-width: 628px)  {
+@media (max-width: 1023px)  {
     .convert {
         width: 90vw;
     }
 }
 
 
-@media (min-width: 629px) and (max-width: 768px) {
+@media (min-width: 1024px) {
     .convert {
         width: 50vw;
     }
 }
-
-
 
