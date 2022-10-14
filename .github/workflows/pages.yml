@@ -30,6 +30,8 @@ jobs:
 
     env:
       NEXT_PUBLIC_BASE_PATH: /coronaCheck
+      MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+
 
     steps:
       - name: Checkout
@@ -96,9 +98,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-        env: 
-          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
-      - name: Set the value
-        id: step_one
-        run: |
-          echo "${{ MYSQL_PORT }}"
