@@ -30,7 +30,7 @@ jobs:
 
     env:
       NEXT_PUBLIC_BASE_PATH: /coronaCheck
-    
+      NEXT_PABLIC_HOST: ${{ env.MYSQL_HOST }}
     
     steps:
       - name: Checkout
