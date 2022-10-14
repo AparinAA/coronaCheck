@@ -84,8 +84,6 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./out
-        env:
-          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
 
   # Deployment job
   deploy:
@@ -98,6 +96,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+        env:
+          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
       - name: Set the value
         id: step_one
         run: |
