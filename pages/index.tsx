@@ -9,7 +9,7 @@ import axios from 'axios';
 import {useEffect} from 'react';
 
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
-console.info(process.env.NEXT_PUBLIC_BASE_PATH );
+console.info(process.env.NEXT_PUBLIC_BASE_PATH, process.env.NEXT_PUBLIC_MYSQL_PORT );
 
 const Home: NextPage = () => {
     const { user, error, isLoading } = useUser();
