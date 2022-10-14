@@ -30,7 +30,6 @@ jobs:
 
     env:
       NEXT_PUBLIC_BASE_PATH: /coronaCheck
-      NEXT_PABLIC_HOST: ${{ env.MYSQL_HOST }}
     
     steps:
       - name: Checkout
@@ -97,3 +96,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+        env: 
+          NEXT_PABLIC_HOST: ${{ env.MYSQL_HOST }}
