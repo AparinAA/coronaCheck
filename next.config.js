@@ -22,16 +22,16 @@ const nextConfig = {
   },
   assetPrefix,
   env: {
-    AUTH0_BASE_URL: process.env.ANEXT_PUBLIC_UTH0_BASE_URL || 'http://localhost:3000',
-    AUTH0_SECRET: process.env.NEXT_PUBLIC_AUTH0_SECRET,
-    AUTH0_ISSUER_BASE_URL: process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL || 'https://dev-m8xtdhux.us.auth0.com',
-    AUTH0_CLIENT_ID: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID,
-    AUTH0_CLIENT_SECRET: process.env.NEXT_PUBLIC_AUTH0_CLIENT_SECRET,
-    MYSQL_HOST: process.env.NEXT_PUBLIC_MYSQL_HOST,
-    MYSQL_PORT: process.env.NEXT_PUBLIC_MYSQL_PORT,
-    MYSQL_DATABASE: process.env.NEXT_PUBLIC_MYSQL_DATABASE,
-    MYSQL_USER: process.env.NEXT_PUBLIC_MYSQL_USER,
-    MYSQL_PASSWORD: process.env.NEXT_PUBLIC_MYSQL_PASSWORD
+    AUTH0_BASE_URL: process.env.AUTH0_BASE_URL || 'http://localhost:3000',
+    AUTH0_SECRET: process.env.AUTH0_SECRET,
+    AUTH0_ISSUER_BASE_URL: process.env.AUTH0_ISSUER_BASE_URL || 'https://dev-m8xtdhux.us.auth0.com',
+    AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+    AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
+    MYSQL_HOST: process.env.MYSQL_HOST,
+    MYSQL_PORT: process.env.MYSQL_PORT,
+    MYSQL_DATABASE: process.env.MYSQL_DATABASE,
+    MYSQL_USER: process.env.MYSQL_USER,
+    MYSQL_PASSWORD: process.env.MYSQL_PASSWORD
   }
 }
 
