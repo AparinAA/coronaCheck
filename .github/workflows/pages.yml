@@ -30,6 +30,7 @@ jobs:
 
     env:
       NEXT_PUBLIC_BASE_PATH: /coronaCheck
+      GITHUB_ENV: "{{ $GITHUB_ENV }}"
     
     steps:
       - name: Checkout
@@ -87,8 +88,6 @@ jobs:
 
   # Deployment job
   deploy:
-    env: 
-      GITHUB_ENV: {{ $GITHUB_ENV }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
