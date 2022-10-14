@@ -22,6 +22,7 @@ const db = mysql({
 });
 
 export default async function excuteQuery({ query, values }: TypeQ) {
+    console.info(process.env.MYSQL_HOST, Number(process.env.MYSQL_PORT), process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, process.env.MYSQL_DATABASE);
     try {
         const results: unknown = await db.query(query, values);
         await db.end();
