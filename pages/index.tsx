@@ -9,7 +9,7 @@ import axios from 'axios';
 import {useEffect} from 'react';
 
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
-console.info(process.env.GITHUB_ENV, process.env.NEXT_PABLIC_HOST);
+console.info(process.env.GITHUB_ENV, process.env.NEXT_PUBLIC_BASE_PATH);
 
 const Home: NextPage = () => {
     const { user, error, isLoading } = useUser();

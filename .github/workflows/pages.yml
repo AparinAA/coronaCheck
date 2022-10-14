@@ -30,7 +30,7 @@ jobs:
 
     env:
       NEXT_PUBLIC_BASE_PATH: /coronaCheck
-      GITHUB_ENV: "$GITHUB_ENV"
+      GITHUB_ENV: "${{ GITHUB_ENV }}"
     
     steps:
       - name: Checkout
