@@ -32,6 +32,9 @@ jobs:
       NEXT_PUBLIC_BASE_PATH: /coronaCheck
       NEXT_PUBLIC_MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
       NEXT_PUBLIC_MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+      NEXT_PUBLIC_MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      NEXT_PUBLIC_MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      NEXT_PUBLIC_MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
 
 
     steps:
