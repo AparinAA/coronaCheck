@@ -90,14 +90,14 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+      env: 
+        MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-        env:
-          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
       - name: Set the value
         id: step_one
         run: |
@@ -105,4 +105,4 @@ jobs:
       - name: Use the value
         id: step_two
         run: |
-          echo "$GITHUB_ENV" # This will output 'yellow'
+          echo "$MYSQL_PORT" # This will output 'yellow'
