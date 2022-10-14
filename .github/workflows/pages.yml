@@ -30,7 +30,7 @@ jobs:
 
     env:
       NEXT_PUBLIC_BASE_PATH: /coronaCheck
-      MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+      NEXT_PUBLIC_MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
 
 
     steps:
