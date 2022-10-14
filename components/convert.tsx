@@ -2,6 +2,9 @@ import React from "react";
 import Rate from './rate';
 import styles from '../styles/convert.module.css';
 import { string } from "yup";
+import axios from 'axios';
+import select from '../pages/api/checkRate';
+import { currenciesRate } from '../pages/api/checkRate';
 
 interface IProps {
 }
@@ -12,6 +15,11 @@ interface IState {
   [type: string]: Value;
 }
 
+interface Rate {
+    id: number,
+    pairCurrency: Value,
+    rate: Value
+}
 
 class Convert extends React.Component<IProps, IState, Value> {
     constructor (props: IProps) {
@@ -22,9 +30,10 @@ class Convert extends React.Component<IProps, IState, Value> {
             'rateTRY': undefined,
             'rateEUR': undefined,
             'rateKZT': undefined,
-            'sellUSD': 18, //продаю доллары в обменнике за TRY
-            'buyUSD': 18.695, //покупаю доллары в обменнике за TRY
-            'sellKZT': 25.76,
+            'USDTRY': 18, //продаю доллары в обменнике за TRY
+            'TRYUSD': 18.71, //покупаю доллары в обменнике за TRY
+            'KZTTRY': 25.62, //покупаю лиры за тенге
+            'KZTUSD': 476.10, //покупаю доллары за тенге
             'percentage': 2,
             'counting': 'TRY',
         }
@@ -33,12 +42,19 @@ class Convert extends React.Component<IProps, IState, Value> {
         this.handlerValueTRY = this.handlerValueTRY.bind(this);
         this.handlerValueKZT = this.handlerValueKZT.bind(this);
         this.handlerValueEUR = this.handlerValueEUR.bind(this);
-        this.handlerSellUSD = this.handlerSellUSD.bind(this);
-        this.handlerBuyUSD = this.handlerBuyUSD.bind(this);
+        this.handlerUSDTRY = this.handlerUSDTRY.bind(this);
+        this.handlerTRYUSD = this.handlerTRYUSD.bind(this);
+        this.handlerKZTTRY = this.handlerKZTTRY.bind(this);
+        this.handlerKZTUSD = this.handlerKZTUSD.bind(this);
         this.handlerPercentage = this.handlerPercentage.bind(this);
         this.handlerExchange = this.handlerExchange.bind(this);
     }
     
+    componentDidMount(): void {
+        axios.get<currenciesRate>('/api/checkRate')
+        .then(res => this.setState(res?.data))
+        .catch( (error: any) => console.info(error));
+    }
 
     handlerValueAmount(value: Value): void {
         this.setState({'amount': value});
@@ -55,14 +71,17 @@ class Convert extends React.Component<IProps, IState, Value> {
     handlerValueKZT(value: Value): void {
         this.setState({'rateKZT': value});
     }
-    handlerSellUSD(value: Value): void {
-        this.setState({'sellUSD': value});
+    handlerUSDTRY(value: Value): void {
+        this.setState({'USDTRY': value});
     }
-    handlerBuyUSD(value: Value): void {
-        this.setState({'buyUSD': value});
+    handlerTRYUSD(value: Value): void {
+        this.setState({'TRYUSD': value});
     }
-    handlerSellKZT(value: Value): void {
-        this.setState({'sellKZT': value});
+    handlerKZTTRY(value: Value): void {
+        this.setState({'KZTTRY': value});
+    }
+    handlerKZTUSD(value: Value): void {
+        this.setState({'KZTUSD': value});
     }
     handlerPercentage(value: Value): void {
         this.setState({'percentage': value});
@@ -72,7 +91,7 @@ class Convert extends React.Component<IProps, IState, Value> {
     }
 
     render () {
-        const {amount, rateUSD, rateTRY, rateKZT, rateEUR, sellUSD, buyUSD, sellKZT, percentage, counting} = this.state;
+        const {amount, rateUSD, rateTRY, rateKZT, rateEUR, USDTRY, TRYUSD, KZTTRY, KZTUSD, percentage, counting} = this.state;
         const state = this.state;
 
         return (
@@ -93,10 +112,13 @@ class Convert extends React.Component<IProps, IState, Value> {
                     
                 </div>
                 <div className={styles.sellbuyUSD}>
-                    <Rate name="USD to TRY" handler={this.handlerSellUSD} value={sellUSD}/>
-                    <Rate name="&#x20a4;/&#x20b8; to USD" handler={this.handlerBuyUSD} value={buyUSD}/>
-                    <Rate name="KZT to TRY" handler={this.handlerSellKZT} value={sellKZT}/>
+                    <Rate name="USD to TRY" handler={this.handlerUSDTRY} value={USDTRY}/>
+                    <Rate name="TRY to USD" handler={this.handlerTRYUSD} value={TRYUSD}/>
                     <Rate name="Percentage" handler={this.handlerPercentage} value={percentage}/>
+                </div>
+                <div className={styles.sellbuyUSD}>
+                    <Rate name="KZT to USD" handler={this.handlerKZTUSD} value={KZTUSD}/>
+                    <Rate name="KZT to TRY" handler={this.handlerKZTTRY} value={KZTTRY}/>
                 </div>
                 <Rate name="USD rate KoronaPay" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")} counting={counting}/>
                 <Rate name="TRY rate KoronaPay" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")} counting={counting}/>
@@ -114,17 +136,17 @@ function totalConvert(state: IState, currency: string): number {
     const counting = state.counting;
     if (currency === "usd") {
         total = (!state?.amount || !state?.rateUSD) ? 0 : (+state?.amount / +state?.rateUSD);
-        total *= +(state?.sellUSD ?? 0) / (counting === "TRY" ? 1 : +(state?.buyUSD ?? 1));
+        total *= +(state?.USDTRY ?? 0) / (counting === "TRY" ? 1 : +(state?.TRYUSD ?? 1));
     }
 
     if (currency === "try") {
         total = (!state?.amount || !state?.rateTRY) ? 0 : (+state?.amount / +state?.rateTRY);
-        total *= ( 1 - ( +(state?.percentage ?? 0) / 100) ) / (counting === "TRY" ? 1 : +(state?.buyUSD ?? 1)) ;
+        total *= ( 1 - ( +(state?.percentage ?? 0) / 100) ) / (counting === "TRY" ? 1 : +(state?.TRYUSD ?? 1)) ;
     }
 
     if (currency === "kzt") {
-        total = (!state?.amount || !state?.rateKZT || !state?.sellKZT || !state?.buyUSD) ? 
-                0 : (+state?.amount / (+state?.rateKZT * ( counting === "TRY" ? +state?.sellKZT : +state?.buyUSD) ) );
+        total = (!state?.amount || !state?.rateKZT) ? 0 : (+state?.amount / +state?.rateKZT);
+        total *= 1 / (counting === "TRY" ? +(state?.KZTTRY ?? 1) : +(state?.KZTUSD ?? 1)) ;
         
     }
 

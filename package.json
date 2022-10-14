@@ -21,11 +21,13 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/mysql": "^2.15.21",
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",
     "@types/react-dom": "18.0.6",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.0",
+    "serverless-mysql": "^1.5.4",
     "typescript": "4.8.3"
   }
 }
