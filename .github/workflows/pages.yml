@@ -87,6 +87,8 @@ jobs:
 
   # Deployment job
   deploy:
+    env: 
+      GITHUB_ENV: {{ $GITHUB_ENV }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
