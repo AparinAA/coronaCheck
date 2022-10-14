@@ -103,4 +103,4 @@ jobs:
       - name: Use the value
         id: step_two
         run: |
-          echo "${{ GITHUB_ENV }}" # This will output 'yellow'
+          echo "$GITHUB_ENV" # This will output 'yellow'
