@@ -10,7 +10,7 @@ if (isGithubActions) {
   // trim off `<owner>/`
   const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
 
-  assetPrefix = `${process.env.NEXT_PUBLIC_BASE_PATH}/`;
+  assetPrefix = `/${repo}/`
 }
 
 const nextConfig = {
@@ -27,11 +27,11 @@ const nextConfig = {
     AUTH0_ISSUER_BASE_URL: process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL || 'https://dev-m8xtdhux.us.auth0.com',
     AUTH0_CLIENT_ID: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID,
     AUTH0_CLIENT_SECRET: process.env.NEXT_PUBLIC_AUTH0_CLIENT_SECRET,
-    MYSQL_HOST: process.env.MYSQL_HOST,
-    MYSQL_PORT: process.env.MYSQL_PORT,
-    MYSQL_DATABASE: process.env.MYSQL_DATABASE,
-    MYSQL_USER: process.env.MYSQL_USER,
-    MYSQL_PASSWORD: process.env.MYSQL_PASSWORD
+    MYSQL_HOST: process.env.NEXT_PUBLIC_MYSQL_HOST,
+    MYSQL_PORT: process.env.NEXT_PUBLIC_MYSQL_PORT,
+    MYSQL_DATABASE: process.env.NEXT_PUBLIC_MYSQL_DATABASE,
+    MYSQL_USER: process.env.NEXT_PUBLIC_MYSQL_USER,
+    MYSQL_PASSWORD: process.env.NEXT_PUBLIC_MYSQL_PASSWORD
   }
 }
 
