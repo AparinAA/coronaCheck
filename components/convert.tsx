@@ -1,9 +1,7 @@
 import React from "react";
 import Rate from './rate';
 import styles from '../styles/convert.module.css';
-import { string } from "yup";
 import axios from 'axios';
-import select from '../pages/api/checkRate';
 import { currenciesRate } from '../pages/api/checkRate';
 
 interface IProps {
