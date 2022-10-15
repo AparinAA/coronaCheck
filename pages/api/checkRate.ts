@@ -12,23 +12,28 @@ export default async function select(
         res: NextApiResponse<currenciesRate>
     ) {
 
-        const result: unknown = await excuteQuery({
-            query: `SELECT * FROM rates`,
-            values: [],
-        });
-
-        if (!isArrayCurrenciesRate(result)) {
-            const error = 'Received malformed products API response';
-            res.status(500).json({error});
-        }
-        const buf: currenciesRate = {};
-        (result as currenciesRate[]).forEach( (item: currenciesRate) => {
-            if (item?.pairCurrency) {
-                buf[item.pairCurrency] = item?.rate;
+        try {
+            const result: unknown = await excuteQuery({
+                query: `SELECT * FROM rates`,
+                values: [],
+            });
+    
+            if (!isArrayCurrenciesRate(result)) {
+                const error = 'Received malformed products API response';
+                res.status(500).json({error});
             }
-        })
-
-        res.status(200).json(buf);
+            const buf: currenciesRate = {};
+            (result as currenciesRate[]).forEach( (item: currenciesRate) => {
+                if (item?.pairCurrency) {
+                    buf[item.pairCurrency] = item?.rate;
+                }
+            })
+    
+            res.status(200).json(buf);
+        } catch {
+            const error = 'Problem request';
+            res.status(200).json({error});
+        }
 }
 
 //check 'unknown' var 
