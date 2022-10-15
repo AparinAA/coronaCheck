@@ -10,20 +10,11 @@ const prefix = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 console.info(process.env.MYSQL_HOST, process.env.NEXT_PUBLIC_VERCEL_MYSQL_PORT, process.env.MYSQL_DATABASE);
 
 const Home: NextPage = () => {
+    /*
     const { user, error, isLoading } = useUser();
-
     { isLoading && <div>Loading...</div> }
     { error && <div>{error.message}</div> }
-
-    return (
-        <div className={styles.container}>
-            <Head>
-                <title>Exchange</title>
-                <meta name="description" content="Post content" />
-                <link rel="icon" href={`${prefix}/exchange.ico`} />
-            </Head>
-            
-            <main className={styles.main}>
+ 
                 { 
                     user ? 
                     <>
@@ -35,6 +26,17 @@ const Home: NextPage = () => {
                     </> :
                     <Link href={`${prefix}/api/auth/login`}><a className={styles.login}>Login</a></Link>
                 }
+                */
+    return (
+        <div className={styles.container}>
+            <Head>
+                <title>Exchange</title>
+                <meta name="description" content="Post content" />
+                <link rel="icon" href={`${prefix}/exchange.ico`} />
+            </Head>
+            
+            <main className={styles.main}>
+               
                 <Convert />
             </main>
         </div>
