@@ -7,7 +7,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import Convert from '../components/convert';
 
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
-console.info(process.env.MYSQL_HOST, process.env.MYSQL_PORT, process.env.MYSQL_DATABASE);
+console.info(process.env.MYSQL_HOST, process.env.NEXT_PUBLIC_MYSQL_PORT, process.env.MYSQL_DATABASE);
 
 const Home: NextPage = () => {
     const { user, error, isLoading } = useUser();
