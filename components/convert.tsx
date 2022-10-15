@@ -49,7 +49,7 @@ class Convert extends React.Component<IProps, IState, Value> {
     }
     
     componentDidMount(): void {
-        axios.get<currenciesRate>(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/api/checkRate`)
+        axios.get<currenciesRate>(`api/checkRate`)
         .then(res => this.setState(res?.data))
         .catch( (error: any) => console.info(error));
     }
