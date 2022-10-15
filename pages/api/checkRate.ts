@@ -11,8 +11,7 @@ export default async function select(
         req: NextApiRequest,
         res: NextApiResponse<currenciesRate>
     ) {
-        res.status(200).json({});
-        /*
+        
         try {
             const result: unknown = await excuteQuery({
                 query: `SELECT * FROM rates`,
@@ -35,7 +34,6 @@ export default async function select(
             const error = 'Problem request';
             res.status(200).json({error});
         }
-        */
 }
 
 //check 'unknown' var 
