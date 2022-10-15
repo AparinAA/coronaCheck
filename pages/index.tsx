@@ -5,8 +5,6 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useUser } from '@auth0/nextjs-auth0';
 import Convert from '../components/convert';
-import axios from 'axios';
-import {useEffect} from 'react';
 
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
 console.info(process.env.MYSQL_HOST, process.env.NEXT_PUBLIC_BASE_PATH);
