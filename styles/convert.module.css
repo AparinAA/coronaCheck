@@ -51,6 +51,7 @@
 
 .total {
     margin: 2px 1px;
+    text-align: center;
     opacity: .8;
     font-size: 14px;
     grid-row-start: span 2;
@@ -83,12 +84,35 @@
 }
 
 .radioExch1:checked ~ .labelExch1 {
-    background-color: rgb(35, 209, 29)
+    background-color: rgb(35, 209, 29);
 }
 
 .radioExch2:checked ~ .labelExch2 {
-    background-color: rgb(35, 209, 29)
+    background-color: rgb(35, 209, 29);
 }
+
+.button {
+    display: block;
+    height: 59px;
+    font-size: 16px;
+    margin-left: auto;
+    border-radius: 9px;
+    border: 1px solid gray;
+    width: 100%;
+    background-color: rgba(35, 209, 29, 0);
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: rgba(220, 220, 220, 0.316);
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+
+
 
 @media (max-width: 450px) {
     .labelInput {

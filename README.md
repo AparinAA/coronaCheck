@@ -1,3 +1,3 @@
 ### Corona Check APP
 
-[https://aparinaa.github.io/coronaCheck/](Click)
+[https://coronacheck.vercel.app](Click)

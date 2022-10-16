@@ -1,5 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import excuteQuery from '../../lib/db';
 
@@ -11,7 +10,7 @@ export default async function select(
         req: NextApiRequest,
         res: NextApiResponse<currenciesRate>
     ) {
-        
+
         try {
             const result: unknown = await excuteQuery({
                 query: `SELECT * FROM rates`,
@@ -31,8 +30,8 @@ export default async function select(
     
             res.status(200).json(buf);
         } catch {
-            const error = 'Problem request';
-            res.status(200).json({error});
+            const error = 'Invalid'
+            res.status(404).json({error})
         }
 }
 
