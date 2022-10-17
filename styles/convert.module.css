@@ -116,6 +116,12 @@
     pointer-events:none;
 }
 
+@media (prefers-color-scheme: dark) {
+    
+    .button {
+      color: white;
+    }
+}
 
 
 @media (max-width: 450px) {
