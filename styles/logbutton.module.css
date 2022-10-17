@@ -5,7 +5,6 @@
     padding: 12px 32px;
     background-color: rgb(35, 209, 29);
     border-radius: 3px;
-    transform: translate(50%,-50%);
 }
 
 .logout {
