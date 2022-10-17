@@ -1,0 +1,17 @@
+
+.login {
+    display: inline-block;
+    margin: 5px 3px;
+    padding: 12px 32px;
+    background-color: rgb(35, 209, 29);
+    border-radius: 3px;
+    transform: translate(50%,-50%);
+}
+
+.logout {
+    display: inline-block;
+    margin: 5px 3px;
+    padding: 12px 32px;
+    background-color: rgba(239, 44, 70, 0.873);
+    border-radius: 3px;
+}
