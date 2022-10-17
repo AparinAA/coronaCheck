@@ -8,7 +8,7 @@
 .main {
   flex: 1;
   display: grid;
-  grid-template-rows: 60px 90vh;
+  grid-template-rows: 60px 1fr;
 }
 
 .start {
