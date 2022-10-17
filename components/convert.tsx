@@ -139,7 +139,14 @@ class Convert extends React.Component<IProps, IState, Value> {
                 <Rate name="KZT rate KoronaPay" value={rateKZT} handler={this.handlerValueKZT} total={totalConvert(state, "kzt")} counting={counting} spinner={Number(spinner)}/>
                 <Rate name="EUR rate KoronaPay" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")} counting={counting} spinner={Number(spinner)}/>
                 
-                <button name="Save rates" className={`${styles.button}`} onClick={this.handlerSaveRate}>{spinner === 2 ? <Spinner /> : 'Save rates'}</button>
+                <button 
+                    name="Save rates" 
+                    className={`${styles.button}`} 
+                    onClick={this.handlerSaveRate}
+                    disabled={spinner === 0}
+                >
+                    {spinner === 2 ? <Spinner /> : 'Save rates'}
+                </button>
             </div>
         );
     }
