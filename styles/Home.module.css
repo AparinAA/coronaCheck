@@ -1,12 +1,13 @@
 .container {
   padding: 0;
+  display: grid;
+  grid-template-rows: 50px auto;
+  height: 100vh;
 }
 
 .main {
-  flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 100%;
 }
 
 .start {
