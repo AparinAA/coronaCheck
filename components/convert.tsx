@@ -5,7 +5,9 @@ import axios from 'axios';
 import { currenciesRate } from '../pages/api/checkRate';
 import { Spinner } from '../components/spinner';
 
+
 interface IProps {
+    [index: string]: any;
 }
 
 
@@ -107,7 +109,17 @@ class Convert extends React.Component<IProps, IState, Value> {
     render () {
         const {amount, rateUSD, rateTRY, rateKZT, rateEUR, USDTRY, TRYUSD, KZTTRY, KZTUSD, percentage, counting, spinner} = this.state;
         const state = this.state;
-
+        let buttonSaveRate;
+        if (this.props.user) {
+            buttonSaveRate = <button 
+                name="Save rates" 
+                className={`${styles.button}`} 
+                onClick={this.handlerSaveRate}
+                disabled={spinner === 0}
+            >
+                {spinner === 2 ? <Spinner /> : 'Save rates'}
+            </button>
+        }
         return (
             <div className={styles.convert}>
                 <h2 className={styles.header}>Convert KoronaPay</h2>
@@ -139,14 +151,8 @@ class Convert extends React.Component<IProps, IState, Value> {
                 <Rate name="KZT rate KoronaPay" value={rateKZT} handler={this.handlerValueKZT} total={totalConvert(state, "kzt")} counting={counting} spinner={Number(spinner)}/>
                 <Rate name="EUR rate KoronaPay" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")} counting={counting} spinner={Number(spinner)}/>
                 
-                <button 
-                    name="Save rates" 
-                    className={`${styles.button}`} 
-                    onClick={this.handlerSaveRate}
-                    disabled={spinner === 0}
-                >
-                    {spinner === 2 ? <Spinner /> : 'Save rates'}
-                </button>
+                { buttonSaveRate }
+                
             </div>
         );
     }

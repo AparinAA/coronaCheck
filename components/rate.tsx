@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes, useState } from "react";
+import React, { useState } from "react";
 import styles from "../styles/convert.module.css";
 import { Spinner } from '../components/spinner';
 
