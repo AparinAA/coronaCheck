@@ -12,8 +12,8 @@ const Home: NextPage = () => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Exchange</title>
-                <meta name="description" content="Post content" />
+                <title>Calculator</title>
+                <meta name="description" content="Calculator KoronaPay" />
                 <link rel="icon" href={`${prefix}/exchange.ico`} />
             </Head>
             
