@@ -22,7 +22,7 @@ export default function Rate (props: IProps) {
         const value = event?.target?.value;
         const number = (''+value)?.replace(',','.');
         
-        Number(number) ? handler(number) : handler(undefined);
+        Number(number) >= 0 ? handler(number) : handler(undefined);
     }
 
     return (

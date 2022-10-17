@@ -8,17 +8,18 @@ import { Spinner } from '../components/spinner';
 interface IProps {
 }
 
+
+interface Rate {
+    name: string,
+    rate: number | string | undefined
+}
+
 type Value = string | number | undefined;
 
 interface IState {
   [type: string]: Value;
 }
 
-interface Rate {
-    id: number,
-    pairCurrency: Value,
-    rate: Value
-}
 
 class Convert extends React.Component<IProps, IState, Value> {
     constructor (props: IProps) {
@@ -133,10 +134,10 @@ class Convert extends React.Component<IProps, IState, Value> {
                     <Rate name="KZT to USD" handler={this.handlerKZTUSD} value={KZTUSD} spinner={Number(spinner)}/>
                     <Rate name="KZT to TRY" handler={this.handlerKZTTRY} value={KZTTRY} spinner={Number(spinner)}/>
                 </div>
-                <Rate name="USD rate KoronaPay" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")} counting={counting}/>
-                <Rate name="TRY rate KoronaPay" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")} counting={counting}/>
-                <Rate name="KZT rate KoronaPay" value={rateKZT} handler={this.handlerValueKZT} total={totalConvert(state, "kzt")} counting={counting}/>
-                <Rate name="EUR rate KoronaPay" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")} counting={counting}/>
+                <Rate name="USD rate KoronaPay" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")} counting={counting} spinner={Number(spinner)}/>
+                <Rate name="TRY rate KoronaPay" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")} counting={counting} spinner={Number(spinner)}/>
+                <Rate name="KZT rate KoronaPay" value={rateKZT} handler={this.handlerValueKZT} total={totalConvert(state, "kzt")} counting={counting} spinner={Number(spinner)}/>
+                <Rate name="EUR rate KoronaPay" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")} counting={counting} spinner={Number(spinner)}/>
                 
                 <button name="Save rates" className={`${styles.button}`} onClick={this.handlerSaveRate}>{spinner === 2 ? <Spinner /> : 'Save rates'}</button>
             </div>

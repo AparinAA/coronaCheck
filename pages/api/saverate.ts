@@ -13,7 +13,7 @@ export default async function select(
 
         if (req?.method?.toUpperCase() === 'POST') {
             const body = req?.body?.data ?? {};
-            const listCurrencies = ['USDTRY', 'TRYUSD', 'KZTTRY', 'KZTUSD', 'percentage'];
+            const listCurrencies = ['USDTRY', 'TRYUSD', 'KZTTRY', 'KZTUSD', 'percentage', 'rateUSD', 'rateTRY', 'rateEUR', 'rateKZT'];
             const values = listCurrencies.map( (cur: string) => {
                 return [body[cur], cur];
             })

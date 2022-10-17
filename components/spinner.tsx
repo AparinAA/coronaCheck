@@ -5,4 +5,4 @@ type SpinnerProps = {
     [types: string]: string
 }
 
-export const Spinner: FunctionComponent<SpinnerProps> = ({}) => <div className={styles.spinner}></div>
+export const Spinner: FunctionComponent<SpinnerProps> = ({}) => <div className={styles.spinner} />
