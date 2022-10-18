@@ -1,5 +1,5 @@
 .alert {
-    position: absolute;
+    position: fixed;
     z-index: 100;
     top: 0;
     left: 50%;
@@ -10,7 +10,6 @@
     animation: 1.5s linear 0s 2 alternate visible;
     transform-origin: center;
     transform: translate(-50%,-100px);
-    
 
 }
 
