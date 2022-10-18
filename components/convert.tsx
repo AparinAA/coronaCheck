@@ -99,7 +99,7 @@ class Convert extends React.Component<IProps, IState, Value> {
     }
     handlerSaveRate(event: any): void {
         this.setState({spinner: 2});
-        axios.post('api/saverate', {data: this.state})
+        axios.post('api/saverate', {data: this.state, id: this.props.user.sub.split('|')[1]})
         .then( () => this.setState({spinner: 4}), () => {
             this.setState({spinner: 3});//visible alert
         })

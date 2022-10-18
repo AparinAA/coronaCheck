@@ -32,7 +32,7 @@ const nextConfig = {
     MYSQL_DATABASE: process.env.NEXT_PUBLIC_VERCEL_MYSQL_DATABASE,
     MYSQL_USER: process.env.NEXT_PUBLIC_VERCEL_MYSQL_USER,
     MYSQL_PASSWORD: process.env.NEXT_PUBLIC_VERCEL_MYSQL_PASSWORD,
-    NEXTAUTH_URL: 'http://localhost:3000'
+    ID: process.env.NEXT_PUBLIC_ID
   }
 }
 
