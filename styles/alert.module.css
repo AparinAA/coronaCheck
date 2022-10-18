@@ -1,0 +1,39 @@
+.alert {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 50%;
+    margin: 10px 3px;
+    padding: 20px 10px;
+    border-radius: 4px;
+    width: 90%;
+    animation: 1.5s linear 0s 2 alternate visible;
+    transform-origin: center;
+    transform: translate(-50%,-100px);
+    
+
+}
+
+@keyframes visible {
+    0% {
+        transform: translate(-50%, -100px);
+        
+    }
+    20% {
+        transform: translate(-50%,0);
+    }
+    100% {
+        transform: translate(-50%,0);
+    }
+}
+
+.error {
+    background-color: rgba(240, 38, 68, 0.749);
+    color: rgb(0, 0, 0);
+}
+
+
+.success {
+    background-color: rgba(9, 217, 23, 0.99);
+    color: rgb(0, 0, 0);
+}

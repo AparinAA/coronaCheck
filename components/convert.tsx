@@ -4,7 +4,7 @@ import styles from '../styles/convert.module.css';
 import axios from 'axios';
 import { currenciesRate } from '../pages/api/checkRate';
 import { Spinner } from '../components/spinner';
-
+import { Alert } from '../components/alert';
 
 interface IProps {
     [index: string]: any;
@@ -38,7 +38,7 @@ class Convert extends React.Component<IProps, IState, Value> {
             'KZTUSD': 476.10, //покупаю доллары за тенге
             'percentage': 2,
             'counting': 'TRY',
-            'spinner': 0
+            'spinner': 0 // 0 - rate is loading, 1 - rate was load, 2 - rate is saving, 3 - rate didn't save (error), 4 - rate was save 
         }
         this.handlerValueAmount = this.handlerValueAmount.bind(this);
         this.handlerValueUSD = this.handlerValueUSD.bind(this);
@@ -100,28 +100,33 @@ class Convert extends React.Component<IProps, IState, Value> {
     handlerSaveRate(event: any): void {
         this.setState({spinner: 2});
         axios.post('api/saverate', {data: this.state})
-        .then( () => this.setState({spinner: 1}) )
+        .then( () => this.setState({spinner: 4}), () => {
+            this.setState({spinner: 3});//visible alert
+        })
         .catch(error => {
             console.info(error);
-            this.setState({spinner: 1});
+            this.setState({spinner: 3}); //visible alert
         })
+        setTimeout( () => this.setState({spinner: 1}), 3.5 * 1000); //hidden alert 
     }
     render () {
-        const {amount, rateUSD, rateTRY, rateKZT, rateEUR, USDTRY, TRYUSD, KZTTRY, KZTUSD, percentage, counting, spinner} = this.state;
         const state = this.state;
+        const {amount, rateUSD, rateTRY, rateKZT, rateEUR, USDTRY, TRYUSD, KZTTRY, KZTUSD, percentage, counting, spinner} = state;
         let buttonSaveRate;
         if (this.props.user) {
             buttonSaveRate = <button 
                 name="Save rates" 
                 className={`${styles.button}`} 
                 onClick={this.handlerSaveRate}
-                disabled={spinner === 0}
+                disabled={[0, 3, 4].indexOf(Number(spinner)) !== -1}
             >
                 {spinner === 2 ? <Spinner /> : 'Save rates'}
             </button>
         }
+        
         return (
             <div className={styles.convert}>
+                <Alert status={''+spinner}/>
                 <h2 className={styles.header}>Convert KoronaPay</h2>
                 <div className={styles.sellbuyUSD}>
                     <Rate name="Amount RUB convert" value={amount} handler={this.handlerValueAmount}/>
