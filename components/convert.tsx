@@ -4,13 +4,12 @@ import styles from '../styles/convert.module.css';
 import axios from 'axios';
 import { totalConvert, truncated, positiveNumber} from '../lib/helper';
 import { currenciesRate } from '../pages/api/checkRate';
-import { Spinner } from '../components/spinner';
 import { Alert } from '../components/alert';
 import { ButtonSave } from '../components/buttonsave';
 
 
 interface IProps {
-    user: {[id: string]: any};
+    user: any;
 }
 
 
@@ -111,7 +110,7 @@ class Convert extends React.Component<IProps, IState, Value> {
                     <Rate name="KZT to USD" keyName="KZTUSD" handler={this.handlerConvert} value={KZTUSD} spinner={Number(spinner)}/>
                     <Rate name="KZT to TRY" keyName="KZTTRY" handler={this.handlerConvert} value={KZTTRY} spinner={Number(spinner)}/>
                 </div>
-                
+
                 <Rate name="USD rate KoronaPay" keyName="rateUSD" value={rateUSD} handler={this.handlerConvert} total={totalConvert(state, "usd")} counting={counting} spinner={Number(spinner)}/>
                 <Rate name="TRY rate KoronaPay" keyName="rateTRY" value={rateTRY} handler={this.handlerConvert} total={totalConvert(state, "try")} counting={counting} spinner={Number(spinner)}/>
                 <Rate name="KZT rate KoronaPay" keyName="rateKZT" value={rateKZT} handler={this.handlerConvert} total={totalConvert(state, "kzt")} counting={counting} spinner={Number(spinner)}/>
