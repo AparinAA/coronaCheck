@@ -30,27 +30,6 @@
   transform: scale(1.01);
 }
 
-.button {
-  display: inline;
-  padding: 6px 16px;
-  margin: 15px;
-  width: auto;
-  background-color: rgb(126, 210, 235);
-  border: 1px solid rgb(126, 210, 235);
-  border-radius: 4px;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.button:hover {
-  background-color: rgb(81, 199, 235);
-  -webkit-transition: all .3s ease-in;
-  -ms-transition: all .3s ease-in;
-  transition: all .3s ease-in;
-
-}
-
-
 .list {
   margin: 15px;
   list-style-type: none;

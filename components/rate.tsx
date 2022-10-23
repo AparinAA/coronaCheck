@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { ChangeEvent } from "react";
 import styles from "../styles/convert.module.css";
 import { Spinner } from '../components/spinner';
 
-type func = (value: number | undefined | string ) => void;
+type InputChangeEvent = ChangeEvent<HTMLInputElement>;
+
+type func = (obj: {[id:string]: string | number | undefined} ) => void;
 
 interface IProps {
     [type: string] : string | number | func | undefined | boolean,
+    keyName: string,
     total?: number,
     value?: number | string | undefined,
     type?: string,
@@ -13,16 +16,18 @@ interface IProps {
     handler: func,
 }
 
-type $Event = any;
-
 export default function Rate (props: IProps) {
     
-    const {name, value, total, handler, type, counting, spinner} = props;
-    function handlerChange(event: $Event) {
+    const {name, keyName, value, total, handler, type, counting, spinner} = props;
+    
+    function handlerChange(event: InputChangeEvent) {
         const value = event?.target?.value;
         const number = (''+value)?.replace(',','.');
         
-        Number(number) >= 0 ? handler(number) : handler(undefined);
+        const obj: {[id:string]: string | number | undefined} = {};
+        obj[keyName] = number;
+        
+        Number(number) >= 0 ? handler(obj) : handler(obj);
     }
 
     return (
@@ -37,7 +42,7 @@ export default function Rate (props: IProps) {
                     <div className={styles.total}>
                         {
                             (total && total > 0) ?
-                            <div><span>{total}</span> <> {counting === "TRY" ? <>&#x20a4;</> : `$` }</></div> :
+                            <div><span>{total}</span> <span>{counting === "TRY" ? <>&#x20a4;</> : `$` }</span></div> :
                             spinner === 0 ? <Spinner /> : ''
                         }
                     </div>

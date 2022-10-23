@@ -1,13 +1,16 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import Rate from './rate';
 import styles from '../styles/convert.module.css';
 import axios from 'axios';
+import { totalConvert, truncated, positiveNumber} from '../lib/helper';
 import { currenciesRate } from '../pages/api/checkRate';
 import { Spinner } from '../components/spinner';
 import { Alert } from '../components/alert';
+import { ButtonSave } from '../components/buttonsave';
+
 
 interface IProps {
-    [index: string]: any;
+    user: {[id: string]: any};
 }
 
 
@@ -40,18 +43,9 @@ class Convert extends React.Component<IProps, IState, Value> {
             'counting': 'TRY',
             'spinner': 0 // 0 - rate is loading, 1 - rate was load, 2 - rate is saving, 3 - rate didn't save (error), 4 - rate was save 
         }
-        this.handlerValueAmount = this.handlerValueAmount.bind(this);
-        this.handlerValueUSD = this.handlerValueUSD.bind(this);
-        this.handlerValueTRY = this.handlerValueTRY.bind(this);
-        this.handlerValueKZT = this.handlerValueKZT.bind(this);
-        this.handlerValueEUR = this.handlerValueEUR.bind(this);
-        this.handlerUSDTRY = this.handlerUSDTRY.bind(this);
-        this.handlerTRYUSD = this.handlerTRYUSD.bind(this);
-        this.handlerKZTTRY = this.handlerKZTTRY.bind(this);
-        this.handlerKZTUSD = this.handlerKZTUSD.bind(this);
-        this.handlerPercentage = this.handlerPercentage.bind(this);
         this.handlerExchange = this.handlerExchange.bind(this);
         this.handlerSaveRate = this.handlerSaveRate.bind(this);
+        this.handlerConvert = this.handlerConvert.bind(this);
     }
     
     componentDidMount(): void {
@@ -64,72 +58,36 @@ class Convert extends React.Component<IProps, IState, Value> {
         });
     }
 
-    handlerValueAmount(value: Value): void {
-        this.setState({'amount': value});
-    }
-    handlerValueUSD(value: Value): void {
-        this.setState({'rateUSD': value});
-    }
-    handlerValueTRY(value: Value): void {
-        this.setState({'rateTRY': value});
-    }
-    handlerValueEUR(value: Value): void {
-        this.setState({'rateEUR': value});
-    }
-    handlerValueKZT(value: Value): void {
-        this.setState({'rateKZT': value});
-    }
-    handlerUSDTRY(value: Value): void {
-        this.setState({'USDTRY': value});
-    }
-    handlerTRYUSD(value: Value): void {
-        this.setState({'TRYUSD': value});
-    }
-    handlerKZTTRY(value: Value): void {
-        this.setState({'KZTTRY': value});
-    }
-    handlerKZTUSD(value: Value): void {
-        this.setState({'KZTUSD': value});
-    }
-    handlerPercentage(value: Value): void {
-        this.setState({'percentage': value});
+    handlerConvert(obj: {[name: string]: Value}): void {
+        this.setState(obj);
     }
     handlerExchange(event: any): void {
         this.setState({'counting' : event.target.value});
     }
-    handlerSaveRate(event: any): void {
+    handlerSaveRate(event: MouseEvent<HTMLButtonElement>): void {
+        event.preventDefault();
         this.setState({spinner: 2});
         axios.post('api/saverate', {data: this.state, id: this.props.user.sub.split('|')[1]})
-        .then( () => this.setState({spinner: 4}), () => {
-            this.setState({spinner: 3});//visible alert
-        })
-        .catch(error => {
-            console.info(error);
+        .then( () => this.setState({spinner: 4}), () => this.setState({spinner: 3}) ) //visible alert
+        .then( () => setTimeout( () => this.setState({spinner: 1}), 3.1 * 1000) ) //hidden alert
+        .catch( () => {
             this.setState({spinner: 3}); //visible alert
+            setTimeout( () => this.setState({spinner: 1}), 3.1 * 1000); //hidden alert 
         })
-        setTimeout( () => this.setState({spinner: 1}), 3.5 * 1000); //hidden alert 
     }
     render () {
         const state = this.state;
-        const {amount, rateUSD, rateTRY, rateKZT, rateEUR, USDTRY, TRYUSD, KZTTRY, KZTUSD, percentage, counting, spinner} = state;
-        let buttonSaveRate;
-        if (this.props.user) {
-            buttonSaveRate = <button 
-                name="Save rates" 
-                className={`${styles.button}`} 
-                onClick={this.handlerSaveRate}
-                disabled={[0, 3, 4].indexOf(Number(spinner)) !== -1}
-            >
-                {spinner === 2 ? <Spinner /> : 'Save rates'}
-            </button>
-        }
+        const { amount, rateUSD, rateTRY, rateKZT, rateEUR, USDTRY, TRYUSD, KZTTRY, KZTUSD, percentage, counting, spinner } = state;
+        
+        let buttonSaveRate = this.props.user && <ButtonSave handler={this.handlerSaveRate} spinner={Number(spinner)} />
         
         return (
             <div className={styles.convert}>
                 <Alert status={''+spinner}/>
                 <h2 className={styles.header}>Convert KoronaPay</h2>
+                
                 <div className={styles.sellbuyUSD}>
-                    <Rate name="Amount RUB convert" value={amount} handler={this.handlerValueAmount}/>
+                    <Rate name="Amount RUB convert" keyName="amount" value={amount} handler={this.handlerConvert}/>
                     <input value="USD" className={styles.radioExch1} id="exchUSD" name="exchange" type="radio" checked={this.state.counting === 'USD'} onChange={this.handlerExchange}/>
                     <label htmlFor="exchUSD" className={`${styles.labelExchCom} ${styles.labelExch1}`}>
                         <span>USD</span>
@@ -142,19 +100,22 @@ class Convert extends React.Component<IProps, IState, Value> {
                     
                     
                 </div>
+
                 <div className={styles.sellbuyUSD}>
-                    <Rate name="USD to TRY" handler={this.handlerUSDTRY} value={USDTRY} spinner={Number(spinner)}/>
-                    <Rate name="TRY to USD" handler={this.handlerTRYUSD} value={TRYUSD} spinner={Number(spinner)}/>
-                    <Rate name="Percentage" handler={this.handlerPercentage} value={percentage} spinner={Number(spinner)}/>
+                    <Rate name="USD to TRY" keyName="USDTRY" handler={this.handlerConvert} value={USDTRY} spinner={Number(spinner)}/>
+                    <Rate name="TRY to USD" keyName="TRYUSD" handler={this.handlerConvert} value={TRYUSD} spinner={Number(spinner)}/>
+                    <Rate name="Percentage" keyName="percentage" handler={this.handlerConvert} value={percentage} spinner={Number(spinner)}/>
                 </div>
+
                 <div className={styles.sellbuyUSD}>
-                    <Rate name="KZT to USD" handler={this.handlerKZTUSD} value={KZTUSD} spinner={Number(spinner)}/>
-                    <Rate name="KZT to TRY" handler={this.handlerKZTTRY} value={KZTTRY} spinner={Number(spinner)}/>
+                    <Rate name="KZT to USD" keyName="KZTUSD" handler={this.handlerConvert} value={KZTUSD} spinner={Number(spinner)}/>
+                    <Rate name="KZT to TRY" keyName="KZTTRY" handler={this.handlerConvert} value={KZTTRY} spinner={Number(spinner)}/>
                 </div>
-                <Rate name="USD rate KoronaPay" value={rateUSD} handler={this.handlerValueUSD} total={totalConvert(state, "usd")} counting={counting} spinner={Number(spinner)}/>
-                <Rate name="TRY rate KoronaPay" value={rateTRY} handler={this.handlerValueTRY} total={totalConvert(state, "try")} counting={counting} spinner={Number(spinner)}/>
-                <Rate name="KZT rate KoronaPay" value={rateKZT} handler={this.handlerValueKZT} total={totalConvert(state, "kzt")} counting={counting} spinner={Number(spinner)}/>
-                <Rate name="EUR rate KoronaPay" value={rateEUR} handler={this.handlerValueEUR} total={totalConvert(state, "eur")} counting={counting} spinner={Number(spinner)}/>
+                
+                <Rate name="USD rate KoronaPay" keyName="rateUSD" value={rateUSD} handler={this.handlerConvert} total={totalConvert(state, "usd")} counting={counting} spinner={Number(spinner)}/>
+                <Rate name="TRY rate KoronaPay" keyName="rateTRY" value={rateTRY} handler={this.handlerConvert} total={totalConvert(state, "try")} counting={counting} spinner={Number(spinner)}/>
+                <Rate name="KZT rate KoronaPay" keyName="rateKZT" value={rateKZT} handler={this.handlerConvert} total={totalConvert(state, "kzt")} counting={counting} spinner={Number(spinner)}/>
+                <Rate name="EUR rate KoronaPay" keyName="rateEUR" value={rateEUR} handler={this.handlerConvert} total={totalConvert(state, "eur")} counting={counting} spinner={Number(spinner)}/>
                 
                 { buttonSaveRate }
                 
@@ -164,41 +125,3 @@ class Convert extends React.Component<IProps, IState, Value> {
 }
 
 export default Convert;
-
-function totalConvert(state: IState, currency: string): number {
-    let total = 0;
-    const counting = state.counting;
-    if (currency === "usd") {
-        total = (!state?.amount || !state?.rateUSD) ? 0 : (+state?.amount / +state?.rateUSD);
-        total *= +(state?.USDTRY ?? 0) / (counting === "TRY" ? 1 : +(state?.TRYUSD ?? 1));
-    }
-
-    if (currency === "try") {
-        total = (!state?.amount || !state?.rateTRY) ? 0 : (+state?.amount / +state?.rateTRY);
-        total *= ( 1 - ( +(state?.percentage ?? 0) / 100) ) / (counting === "TRY" ? 1 : +(state?.TRYUSD ?? 1)) ;
-    }
-
-    if (currency === "kzt") {
-        total = (!state?.amount || !state?.rateKZT) ? 0 : (+state?.amount / +state?.rateKZT);
-        total *= 1 / (counting === "TRY" ? +(state?.KZTTRY ?? 1) : +(state?.KZTUSD ?? 1)) ;
-        
-    }
-
-    if (currency === "eur") {
-        total = (!state?.amount || !state?.rateEUR) ? 0 : (+state?.amount / +state?.rateEUR);
-    }
-    
-    return truncated(total, 2);
-    
-}
-
-function truncated(num: number, decimalPlaces: number) {
-    const numPowerConverter = Math.pow(10, decimalPlaces); 
-    return (!positiveNumber(num) || !positiveNumber(decimalPlaces)) ? 0 : ~~(num * numPowerConverter)/numPowerConverter;
-}
-
-//check positive number
-function positiveNumber(number: number) {
-    return typeof number === 'string' ? +number > 0.00000000000000001 : number > 0.00000000000000001;
-}
-

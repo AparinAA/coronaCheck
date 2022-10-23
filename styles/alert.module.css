@@ -27,12 +27,12 @@
 }
 
 .error {
-    background-color: rgba(240, 38, 68, 0.99);
+    background-color: rgba(235, 63, 89, 0.99);
     color: rgb(0, 0, 0);
 }
 
 
 .success {
-    background-color: rgba(9, 217, 23, 0.99);
+    background-color: rgba(28, 237, 0, 0.97);
     color: rgb(0, 0, 0);
 }
