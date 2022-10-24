@@ -1,3 +1,3 @@
 ### Corona Check APP
 
-[Click](https://coronacheck.vercel.app)
+[Click for go to site ](https://coronacheck.vercel.app)
