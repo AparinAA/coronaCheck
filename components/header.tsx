@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const HeaderMenu: FunctionComponent<Props> = ({status, title, isLoading}) => {
-    const loginlogout =  <Logbutton status={status} name={isLoading ? <Spinner /> : (status ? 'Logout' : "Login")}/>;
+    const loginlogout =  <Logbutton status={status} name={isLoading ? <Spinner /> : <span>{status ? 'Logout' : "Login"}</span>}/>;
     
     return <header className={styles.headerMenu}>
         { loginlogout }
