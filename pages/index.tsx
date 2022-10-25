@@ -9,6 +9,7 @@ const prefix = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 const Home: NextPage = () => {
     const { user, error, isLoading } = useUser();
+
     return (
         <div className={styles.container}>
             <Head>
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
             
                 
             <main className={styles.main}>
-                <HeaderMenu status={user ? true : false } />
+                <HeaderMenu status={user ? true : false } isLoading={isLoading}/>
                 <Convert user={ user } />
             </main>
         </div>
