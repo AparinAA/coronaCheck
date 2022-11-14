@@ -26,6 +26,7 @@ export function totalConvert(state: IState, currency: string): number {
     
         case "eur":
             total = (!state?.amount || !state?.rateEUR) ? 0 : (+state?.amount / +state?.rateEUR);
+            total *= +(state?.EURTRY ?? 0) / (counting === "TRY" ? 1 : +(state?.TRYUSD ?? 1));
             break;
     }
     

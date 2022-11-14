@@ -35,6 +35,7 @@ class Convert extends React.Component<IProps, IState, Value> {
             'rateEUR': undefined,
             'rateKZT': undefined,
             'USDTRY': 18, //продаю доллары в обменнике за TRY
+            'EURTRY': 18.7, //продаю евро в обменнике за TRY
             'TRYUSD': 18.71, //покупаю доллары в обменнике за TRY
             'KZTTRY': 25.62, //покупаю лиры за тенге
             'KZTUSD': 476.10, //покупаю доллары за тенге
@@ -76,7 +77,7 @@ class Convert extends React.Component<IProps, IState, Value> {
     }
     render () {
         const state = this.state;
-        const { amount, rateUSD, rateTRY, rateKZT, rateEUR, USDTRY, TRYUSD, KZTTRY, KZTUSD, percentage, counting, spinner } = state;
+        const { amount, rateUSD, rateTRY, rateKZT, rateEUR, USDTRY, TRYUSD, EURTRY, KZTTRY, KZTUSD, percentage, counting, spinner } = state;
         
         let buttonSaveRate = this.props.user && <ButtonSave handler={this.handlerSaveRate} spinner={Number(spinner)} />
         
@@ -107,6 +108,7 @@ class Convert extends React.Component<IProps, IState, Value> {
                 </div>
 
                 <div className={styles.sellbuyUSD}>
+                    <Rate name="EUR to TRY" keyName="EURTRY" handler={this.handlerConvert} value={EURTRY} spinner={Number(spinner)}/>
                     <Rate name="KZT to USD" keyName="KZTUSD" handler={this.handlerConvert} value={KZTUSD} spinner={Number(spinner)}/>
                     <Rate name="KZT to TRY" keyName="KZTTRY" handler={this.handlerConvert} value={KZTTRY} spinner={Number(spinner)}/>
                 </div>
