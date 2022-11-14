@@ -56,7 +56,7 @@ export default async function select(
                 axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
                 axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT })
             ]))
-            .forEach( resp => {
+            .forEach( (resp: any) => {
                 const data = resp.data[0];
                 buf[`rate${data.receivingCurrency.code}`] = data.exchangeRate;
             });
