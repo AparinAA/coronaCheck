@@ -19,18 +19,18 @@ export default async function select(
                 query: `SELECT * FROM rates`,
                 values: [],
             });
-    
-            if (!isArrayCurrenciesRate(result)) {
-                const error = 'Received malformed products API response';
-                res.status(500).json({error});
-            }
             
             const buf: currenciesRate = {};
-            (result as currenciesRate[]).forEach( (item: currenciesRate) => {
-                if (item?.pairCurrency) {
-                    buf[item.pairCurrency] = item?.rate;
-                }
-            })
+            if (isArrayCurrenciesRate(result)) {
+                (result as currenciesRate[]).forEach( (item: currenciesRate) => {
+                    if (item?.pairCurrency) {
+                        buf[item.pairCurrency] = item?.rate;
+                    }
+                })
+            } else {
+                console.info("Request to BD has been invalid");
+            }
+            
 
             
             const paramsGeneral = {
