@@ -14,13 +14,13 @@ export default async function select(
 
         try {
             
-
+            const buf: currenciesRate = {};
+            /*
             const result: unknown = await excuteQuery({
                 query: `SELECT * FROM rates`,
                 values: [],
             });
             
-            const buf: currenciesRate = {};
             if (isArrayCurrenciesRate(result)) {
                 (result as currenciesRate[]).forEach( (item: currenciesRate) => {
                     if (item?.pairCurrency) {
@@ -30,8 +30,7 @@ export default async function select(
             } else {
                 console.info("Request to BD has been invalid");
             }
-            
-
+            */
             
             const paramsGeneral = {
                 'sendingCountryId': 'RUS',
@@ -54,11 +53,33 @@ export default async function select(
                 axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
                 axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
                 axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
-                axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT })
+                axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
+                axios.get('https://www.tolunaylar.com.tr')
             ]))
             .forEach( (resp: any) => {
-                const data = resp.data[0];
-                buf[`rate${data.receivingCurrency.code}`] = data.exchangeRate;
+                const data = resp.data;
+                if ( typeof data === 'string' ) {
+                    const reg = new RegExp('USD');
+                    let d = data?.slice(data.search(reg),data.search(reg)+500)
+                    ?.match(/\d+\,\d+/g)
+                    ?.map( (number: string) => +( number.replace(',','.') ) );
+                    
+                    if ( d?.length === 2 ) {
+                        buf['USDTRY'] = d[0].toString();
+                        buf['TRYUSD'] = d[1].toString();
+                    }
+                    
+                    d = data?.slice(data.search(/EUR/g),data.search(/EUR/g)+500)
+                    ?.match(/\d+\,\d+/g)
+                    ?.map( (number: string) => +( number.replace(',','.') ) );
+                    
+                    if ( d?.length === 2 ) {
+                        buf['EURTRY'] = d[0].toString();
+                    }
+                    
+                } else {
+                    buf[`rate${data[0].receivingCurrency.code}`] = data[0].exchangeRate;
+                }
             });
 
             res.status(200).json(buf);
