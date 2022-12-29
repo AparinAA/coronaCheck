@@ -5,14 +5,14 @@ interface User {
     password: string;
 }
 
-export const loginRequest = async (user : User) => {
+export const loginRequest = async (user: User) => {
     const data = {
         username: user.username,
         password: user.password
     };
 
     const JSONdata = JSON.stringify(data);
-    
+
     const endpoint = "api/login";
 
     const option = {

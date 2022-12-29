@@ -17,11 +17,11 @@ const Home: NextPage = () => {
                 <meta name="description" content="Calculator KoronaPay" />
                 <link rel="icon" href={`${prefix}/exchange.ico`} />
             </Head>
-            
-                
+
+
             <main className={styles.main}>
-                <HeaderMenu status={user ? true : false } isLoading={isLoading}/>
-                <Convert user={ user } />
+                <HeaderMenu status={user ? true : false} isLoading={isLoading} />
+                <Convert user={user} />
             </main>
         </div>
     )
