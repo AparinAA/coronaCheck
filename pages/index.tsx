@@ -14,7 +14,7 @@ const Home: NextPage = () => {
         <div className={styles.container}>
             <Head>
                 <title>Calculator</title>
-                <meta name="description" content="Calculator KoronaPay" />
+                <meta name="description" content="Calculator" />
                 <link rel="icon" href={`${prefix}/exchange.ico`} />
             </Head>
 
@@ -22,10 +22,10 @@ const Home: NextPage = () => {
             <main className={styles.main}>
                 {/* <HeaderMenu status={user ? true : false} isLoading={isLoading} /> */}
                 <Convert user={user} />
-                <footer className={styles.footer}>
-                    <div>Powered by <a href='https://www.aleksandraparin.site' rel="noreferrer" target="_blank">Aleksandr Aparin</a></div>
-                </footer>
             </main>
+            <footer className={styles.footer}>
+                <div>Powered by <a href='https://www.aleksandraparin.site' rel="noreferrer" target="_blank">Aleksandr Aparin</a></div>
+            </footer>
         </div>
     )
 }

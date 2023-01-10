@@ -1,14 +1,12 @@
 .container {
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: 90vh;
+  display: grid;
+  grid-template-rows: 96vh 4vh;
 }
 
 .main {
-  flex: 1;
   display: grid;
-  grid-template-rows: 96vh 4vh;
+  grid-template-rows: auto 20px;
 }
 
 .start {
@@ -51,16 +49,17 @@
 
 .footer {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding: 10px 0;
   font-size: 16px;
 }
 
 .footer div a {
   text-decoration: none;
-  color: rgb(58, 58, 58);;
+  color: inherit;
 }
 
 .footer div a:hover {
-  color: black
+  color: rgb(117, 117, 117);
 }
