@@ -34,7 +34,6 @@
 
 .input:where(:focus, :active, :hover) {
     outline: none;
-    
 }
 
 .labelInput {
@@ -79,7 +78,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border-radius: 9px;    
+    border-radius: 9px;
     width: 90px;
 }
 
@@ -104,11 +103,10 @@
         width: 90vw;
     }
   }
-  
-  
-  @media (min-width: 1024px) {
-    .convert {
-        width: 50vw;
-    }
-  }
-  
+
+@media (min-width: 1024px) {
+.convert {
+    width: 50vw;
+}
+}
+

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Convert from '../components/convert';
 import { useUser } from '@auth0/nextjs-auth0';
-import { HeaderMenu } from '../components/header';
+// import { HeaderMenu } from '../components/header';
 
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
@@ -20,8 +20,11 @@ const Home: NextPage = () => {
 
 
             <main className={styles.main}>
-                <HeaderMenu status={user ? true : false} isLoading={isLoading} />
+                {/* <HeaderMenu status={user ? true : false} isLoading={isLoading} /> */}
                 <Convert user={user} />
+                <footer className={styles.footer}>
+                    <div>Powered by <a href='https://www.aleksandraparin.site' rel="noreferrer" target="_blank">Aleksandr Aparin</a></div>
+                </footer>
             </main>
         </div>
     )

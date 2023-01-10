@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import excuteQuery from '../../lib/db';
 import axios from 'axios';
 import { fetchRateP2PBinance } from '../../lib/helper';
 
@@ -15,6 +14,7 @@ export default async function select(
 
     try {
 
+        const queryData = req.query;
         const buf: currenciesRate = {};
 
         const dataBUYtoP2PBinance = {
@@ -98,7 +98,7 @@ export default async function select(
     }
 }
 
-//check 'unknown' var 
+//check 'unknown' var
 function isArrayCurrenciesRate(obj: unknown): boolean {
     return Array.isArray(obj) && obj.every(isCurrenciesRate);
 }

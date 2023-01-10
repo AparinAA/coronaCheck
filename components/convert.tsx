@@ -7,7 +7,6 @@ import { currenciesRate } from '../pages/api/checkRate';
 import { Alert } from '../components/alert';
 import { ButtonSave } from '../components/buttonsave';
 
-
 interface IProps {
     user: any;
 }
@@ -43,7 +42,7 @@ class Convert extends React.Component<IProps, IState, Value> {
             'RUBUSDT': 71,
             'percentage': 2,
             'counting': 'TRY',
-            'spinner': 0 // 0 - rate is loading, 1 - rate was load, 2 - rate is saving, 3 - rate didn't save (error), 4 - rate was save 
+            'spinner': 0, // 0 - rate is loading, 1 - rate was load, 2 - rate is saving, 3 - rate didn't save (error), 4 - rate was save
         }
         this.handlerExchange = this.handlerExchange.bind(this);
         this.handlerSaveRate = this.handlerSaveRate.bind(this);
@@ -63,6 +62,7 @@ class Convert extends React.Component<IProps, IState, Value> {
     handlerConvert(obj: { [name: string]: Value }): void {
         this.setState(obj);
     }
+
     handlerExchange(event: any): void {
         this.setState({ 'counting': event.target.value });
     }
@@ -87,7 +87,7 @@ class Convert extends React.Component<IProps, IState, Value> {
         return (
             <div className={styles.convert}>
                 <Alert status={'' + spinner} />
-                <h2 className={styles.header}>Convert KoronaPay</h2>
+                <h1 className={styles.header}>Convert</h1>
 
                 <div className={styles.sellbuyUSD}>
                     <Rate name="Amount RUB convert" keyName="amount" value={amount} handler={this.handlerConvert} />

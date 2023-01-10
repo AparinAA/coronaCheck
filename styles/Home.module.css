@@ -8,7 +8,7 @@
 .main {
   flex: 1;
   display: grid;
-  grid-template-rows: 70px auto;
+  grid-template-rows: 96vh 4vh;
 }
 
 .start {
@@ -23,7 +23,6 @@
   background-color: rgb(126, 210, 235);
   text-decoration: none;
   transition: all 150ms ease-in;
-  
 }
 
 .start:hover {
@@ -48,4 +47,20 @@
 
 .profile {
   margin: 15px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.footer div a {
+  text-decoration: none;
+  color: rgb(58, 58, 58);;
+}
+
+.footer div a:hover {
+  color: black
 }
