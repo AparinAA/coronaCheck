@@ -87,7 +87,7 @@ class Convert extends React.Component<IProps, IState, Value> {
         return (
             <div className={styles.convert}>
                 <Alert status={'' + spinner} />
-                <h1 className={styles.header}>Convert</h1>
+                <h2 className={styles.header}>Convert</h2>
 
                 <div className={styles.sellbuyUSD}>
                     <Rate name="Amount RUB convert" keyName="amount" value={amount} handler={this.handlerConvert} />

@@ -1,7 +1,9 @@
 .container {
   padding: 0;
-  display: grid;
-  grid-template-rows: 96vh 4vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
 }
 
 .main {
