@@ -66,18 +66,21 @@ export default async function select(
             }
         }
         for (let i = 1; i < 8; i++) {
-            console.info(`res ${i}`, def[`res${i}`]);
+            console.info(`res ${i}`,);//def[`res${i}`]);
         }
-        (await Promise.all([
-            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
-            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
-            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
-            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
+        const responses = await Promise.all([
+            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
+            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
+            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
+            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
             axios.get('https://www.tolunaylar.com.tr'),
             fetchRateP2PBinance(dataBUYtoP2PBinance),
             fetchRateP2PBinance(dataSELLtoP2PBinance),
-        ]))
-            .forEach((resp: any) => {
+        ])
+
+        if (responses) {
+            responses.forEach((resp: any) => {
+                console.info(resp?.data?.code);
                 const data = resp.data;
                 if (typeof data === 'string') {
                     const reg = new RegExp('USD');
@@ -104,9 +107,10 @@ export default async function select(
                     buf[`${resp.from}${resp.to}`] = resp.rate;
                 }
             });
+        }
         res.status(200).json(buf);
-    } catch {
-        const error = 'Invalid'
+    } catch (e) {
+        const error = JSON.stringify(e);
         res.status(404).json({ error })
     }
 }
