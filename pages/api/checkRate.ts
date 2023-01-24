@@ -62,28 +62,14 @@ export default async function select(
         const res6 = await fetchRateP2PBinance(dataBUYtoP2PBinance);
         const res7 = await fetchRateP2PBinance(dataSELLtoP2PBinance);
 
-        const def: any = {
-            ...{
-                "res1": res1.data,
-                "res2": res2.data,
-                "res3": res3.data,
-                "res4": res4.data,
-                "res5": res5.data,
-                "res6": res6,
-                "res7": res7
-            }
-        };
-
-
-        res.status(300).json({ error: JSON.stringify(def) });
         (await Promise.all([
             axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
             axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
             axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
             axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
-            axios.get('https://www.tolunaylar.com.tr'),
-            fetchRateP2PBinance(dataBUYtoP2PBinance),
-            fetchRateP2PBinance(dataSELLtoP2PBinance),
+            // axios.get('https://www.tolunaylar.com.tr'),
+            // fetchRateP2PBinance(dataBUYtoP2PBinance),
+            // fetchRateP2PBinance(dataSELLtoP2PBinance),
         ]))
             .forEach((resp: any) => {
                 const data = resp.data;
