@@ -19,7 +19,7 @@ interface IProps {
 
 export default function Rate(props: IProps) {
 
-    const { name, keyName, value, total, handler, type, counting, spinner, select, handlerChangeBank } = props;
+    const { name, keyName, value, total, handler, type, counting, spinner = {}, select, handlerChangeBank } = props;
 
     function handlerChange(event: InputChangeEvent) {
         const value = event?.target?.value;

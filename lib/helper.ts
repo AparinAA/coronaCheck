@@ -1,9 +1,15 @@
+import axios from "axios";
+
 type Value = string | number | undefined;
 
-interface IState {
-    [type: string]: Value;
+type spinner = {
+    [type: string]: number
 }
 
+interface IState {
+    [type: string]: Value | spinner;
+    spinner: spinner
+}
 //we are counting total value
 export function totalConvert(state: IState, currency: string): number {
     let total = 0;
@@ -113,4 +119,30 @@ export async function fetchAllRateUSDTfromP2PBinance(dataBUY: DataPOST, dataSELL
         .catch((e) => {
             return { "error": e };
         })
+}
+
+type Params = {
+    [index: string]: string
+}
+
+interface koronaTypeParams {
+    url: string,
+    params: Params
+}
+
+export async function checkKoronaAPI({ url, params }: koronaTypeParams) {
+    try {
+        const resp = await axios.get(url, { params });
+
+        if ((resp.status && ![200, 201].includes(resp.status))) {
+            throw Error(`${resp.status}`);
+        } else {
+            const buf: any = {};
+            const data = resp.data;
+            buf[`rate${data[0].receivingCurrency.code}`] = data[0].exchangeRate;
+            return { data: buf };
+        }
+    } catch (error) {
+        return { error };
+    }
 }
