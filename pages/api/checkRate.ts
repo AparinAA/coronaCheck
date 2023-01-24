@@ -69,11 +69,11 @@ export default async function select(
             console.info(`res ${i}`,);//def[`res${i}`]);
         }
         const responses = await Promise.all([
-            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
-            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
-            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
-            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
-            axios.get('https://www.tolunaylar.com.tr'),
+            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
+            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
+            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
+            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
+            // axios.get('https://www.tolunaylar.com.tr'),
             fetchRateP2PBinance(dataBUYtoP2PBinance),
             fetchRateP2PBinance(dataSELLtoP2PBinance),
         ])
