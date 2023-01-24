@@ -54,24 +54,24 @@ export default async function select(
         const paramsKZT = { ...paramsGeneral, 'receivingCurrencyId': '398', 'receivingCountryId': 'KAZ' };
 
 
-        const def: any = {
-            ...{
-                "res1": await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
-                "res2": await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
-                "res3": await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
-                "res4": await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
-                "res5": await axios.get('https://www.tolunaylar.com.tr'),
-                "res6": await fetchRateP2PBinance(dataBUYtoP2PBinance),
-                "res7": await fetchRateP2PBinance(dataSELLtoP2PBinance),
-            }
-        }
-        for (let i = 1; i < 8; i++) {
-            console.info(`res ${i}`,);//def[`res${i}`]);
-        }
+        // const def: any = {
+        //     ...{
+        //         "res1": await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
+        //         "res2": await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
+        //         "res3": await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
+        //         "res4": await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
+        //         "res5": await axios.get('https://www.tolunaylar.com.tr'),
+        //         "res6": await fetchRateP2PBinance(dataBUYtoP2PBinance),
+        //         "res7": await fetchRateP2PBinance(dataSELLtoP2PBinance),
+        //     }
+        // }
+        // for (let i = 1; i < 8; i++) {
+        //     console.info(`res ${i}`,);//def[`res${i}`]);
+        // }
         const responses = await Promise.all([
-            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
-            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
-            // axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
+            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
+            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
+            axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR }),
             axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT }),
             axios.get('https://www.tolunaylar.com.tr'),
             fetchRateP2PBinance(dataBUYtoP2PBinance),
