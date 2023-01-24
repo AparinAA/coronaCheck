@@ -54,6 +54,28 @@ export default async function select(
         const paramsKZT = { ...paramsGeneral, 'receivingCurrencyId': '398', 'receivingCountryId': 'KAZ' };
 
 
+        const res1 = await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD });
+        const res2 = await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY });
+        const res3 = await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsEUR });
+        const res4 = await axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsKZT });
+        const res5 = await axios.get('https://www.tolunaylar.com.tr');
+        const res6 = await fetchRateP2PBinance(dataBUYtoP2PBinance);
+        const res7 = await fetchRateP2PBinance(dataSELLtoP2PBinance);
+
+        const def: any = {
+            ...{
+                "res1": res1.data,
+                "res2": res2.data,
+                "res3": res3.data,
+                "res4": res4.data,
+                "res5": res5.data,
+                "res6": res6,
+                "res7": res7
+            }
+        };
+
+
+        res.status(300).json({ error: JSON.stringify(def) });
         (await Promise.all([
             axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsUSD }),
             axios.get('https://koronapay.com/transfers/online/api/transfers/tariffs', { params: paramsTRY }),
@@ -90,7 +112,6 @@ export default async function select(
                     buf[`${resp.from}${resp.to}`] = resp.rate;
                 }
             });
-
         res.status(200).json(buf);
     } catch {
         const error = 'Invalid'
