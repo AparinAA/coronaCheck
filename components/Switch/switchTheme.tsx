@@ -19,9 +19,11 @@ export function SwitchTheme() {
         }
     }, [theme])
 
-    return <label className={styles.mainSwitch}>
-        <input type="checkbox" onChange={() => setTheme(!theme)} checked={theme} />
-        <span className={`${styles.slider} ${styles.round}`}></span>
+    return <div className={styles.switchTheme}>
         <div className={`${styles.switch} ${theme ? styles.dark : styles.light}`}></div>
-    </label>
+        <label className={styles.mainSwitch}>
+            <input type="checkbox" onChange={() => setTheme(!theme)} checked={theme} />
+            <span className={`${styles.slider} ${styles.round}`}></span>
+        </label>
+    </div>
 }

@@ -1,46 +1,40 @@
+.switchTheme {
+    display: flex;
+    padding-left: 3px;
+    gap: 5px;
+}
 .mainSwitch {
     position: relative;
-    margin-top: 5px;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
 
 .switch {
-    position: absolute;
-    top: 2px;
-    left: 60px;
     width: 30px;
-    height: 34px;
+    height: 30px;
     outline: none;
     border-radius: 50%;
 }
 
-.switch:hover {
-    cursor: pointer;
-}
-
 .dark {
     background: url('../../public/dark-theme.svg');
-    background-size: 18px 18px;
-    background-position: 5px 5px;
+    background-size: 25px 25px;
+    background-position: 2px 5px;
     background-repeat: no-repeat;
     color: black;
     width: 30px;
     height: 30px;
-    border: 1px solid #fff;
 }
 
 .light {
     background: url('../../public/light-theme.svg');
-    
-    background-size: 18px 18px;
-    background-position: 5px 5px;
+    background-size: 25px 25px;
+    background-position: 2px 5px;
     background-repeat: no-repeat;
     color: #fff;
     width: 30px;
     height: 30px;
-    border: 1px solid #000;
 }
   
   /* Hide default HTML checkbox */
