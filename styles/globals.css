@@ -32,25 +32,12 @@ body.dark-theme {
   --bgd-color: #121212;
 }
 
-/* html.dark-theme {
-  --color-scheme: dark;
-} */
-
 @media (prefers-color-scheme: dark) {
-  /* html {
-    --color-scheme: dark;
-  } */
-
   body {
     --text-color: white;
     --bgd-color: black;
   }
   
-/* 
-  html.light-theme {
-    --color-scheme: none;
-  } */
-
   body.light-theme {
     --text-color: #222;
     --bgd-color: #fff;
@@ -62,10 +49,6 @@ body {
   color: var(--text-color);
   background-color: var(--bgd-color);
 }
-
-/* html {
-  color-scheme: var(--color-scheme);
-} */
 
 input {
   background-color: var(--bgd-color);

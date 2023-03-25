@@ -1,18 +1,27 @@
-import React, { ReactEventHandler } from "react";
+import React, { ReactEventHandler, useEffect, useState } from "react";
 import styles from './switchTheme.module.css';
 
-interface SwitchThemeProps {
-    onChange: ReactEventHandler,
-    theme: 'light-theme' | 'dark-theme'
-}
 
-export function SwitchTheme({ onChange, theme }: SwitchThemeProps) {
+export function SwitchTheme() {
+    const [theme, setTheme] = useState<boolean>(false);
 
-    return <label className={styles.switch}>
-        <input type="checkbox" onChange={onChange} />
-        {/* <div className={styles.switchOut}>
-            <div className={styles.switchIn}></div>
-        </div> */}
-        {theme}
+    useEffect(() => {
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        document.body.classList.add(prefersDarkScheme.matches ? 'dark-theme' : 'light-theme');
+        setTheme(prefersDarkScheme.matches);
+    }, []);
+
+    useEffect(() => {
+        if (theme) {
+            document.body.classList.replace('light-theme', 'dark-theme');
+        } else {
+            document.body.classList.replace('dark-theme', 'light-theme');
+        }
+    }, [theme])
+
+    return <label className={styles.mainSwitch}>
+        <input type="checkbox" onChange={() => setTheme(!theme)} checked={theme} />
+        <span className={`${styles.slider} ${styles.round}`}></span>
+        <div className={`${styles.switch} ${theme ? styles.dark : styles.light}`}></div>
     </label>
 }
