@@ -17,12 +17,57 @@ a {
   margin: 0;
 }
 
+/* html {
+  --color-scheme: none;
+} */
+
+body {
+  --text-color: #222;
+  --bgd-color: #fff;
+}
+
+/* Цвета тёмной темы */
+body.dark-theme {
+  --text-color: #eee;
+  --bgd-color: #121212;
+}
+
+/* html.dark-theme {
+  --color-scheme: dark;
+} */
+
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+  /* html {
+    --color-scheme: dark;
+  } */
+
   body {
-    color: white;
-    background: black;
+    --text-color: white;
+    --bgd-color: black;
   }
+  
+/* 
+  html.light-theme {
+    --color-scheme: none;
+  } */
+
+  body.light-theme {
+    --text-color: #222;
+    --bgd-color: #fff;
+  }
+}
+
+
+body {
+  color: var(--text-color);
+  background-color: var(--bgd-color);
+}
+
+/* html {
+  color-scheme: var(--color-scheme);
+} */
+
+input {
+  background-color: var(--bgd-color);
+  color: var(--text-color);
 }

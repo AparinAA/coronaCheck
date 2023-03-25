@@ -1,0 +1,39 @@
+.switch {
+    display: block;
+}
+
+.switchOut {
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 40px;
+    height: 20px;
+    padding: 0;
+}
+
+.switchIn {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    margin: 1px;
+    padding: 0;
+    border: none;
+    background-color: rgb(25, 248, 25)
+}
+
+.switch:hover {
+    cursor: pointer;
+    
+}
+
+.switch input {
+    display: none;
+}
+
+
+.dark {
+    
+}
+
+.light {
+
+}
