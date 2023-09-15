@@ -84,16 +84,13 @@ export default async function handler(
                 (await responseSell.json())?.result?.items?.[0]?.price ?? "";
 
             let buf: any = {};
-            if (responseBuy && responseSell) {
-                if (type === "buy") {
-                    buf = { ...buf, RUBUSDT };
-                } else if (type === "sell") {
-                    buf = { ...buf, USDTTRY };
-                } else {
-                    buf = { ...buf, RUBUSDT, USDTTRY };
-                }
+
+            if (type === "buy") {
+                buf = { ...buf, RUBUSDT };
+            } else if (type === "sell") {
+                buf = { ...buf, USDTTRY };
             } else {
-                throw Error("Unknown error");
+                buf = { ...buf, RUBUSDT, USDTTRY };
             }
 
             res.status(200).json(buf);
