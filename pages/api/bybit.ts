@@ -56,6 +56,9 @@ export default async function handler(
                 "https://api2.bybit.com/fiat/otc/item/online",
                 {
                     method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                     body: JSON.stringify(dataBUYtoP2PBybit),
                 }
             );
@@ -64,6 +67,9 @@ export default async function handler(
                 "https://api2.bybit.com/fiat/otc/item/online",
                 {
                     method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                     body: JSON.stringify(dataSELLtoP2PBybit),
                 }
             );
